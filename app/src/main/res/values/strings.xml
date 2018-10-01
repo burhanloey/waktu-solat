@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Waktu Solat</string>
+    <string name="fetch">Fetch Data</string>
+    <string-array name="district">
+        <item>PRK06- Larut Matang, Taiping</item>
+        <item>Somewhere somewhere</item>
+    </string-array>
+</resources>
