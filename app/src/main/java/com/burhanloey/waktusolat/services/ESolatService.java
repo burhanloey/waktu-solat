@@ -8,5 +8,5 @@ public interface ESolatService {
     String URL = "https://www.e-solat.gov.my/";
 
     @GET("index.php?r=esolatApi/takwimsolat&period=year")
-    Call<YearlyPrayerTimes> yearlyPrayTimes(@Query("zone") String zone);
+    Call<YearlyPrayerTimes> yearlyPrayerTimes(@Query("zone") String zone);
 }

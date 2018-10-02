@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         ESolatService service = retrofit.create(ESolatService.class);
 
-        Call<YearlyPrayerTimes> prayTimes = service.yearlyPrayTimes(districtCode);
+        Call<YearlyPrayerTimes> prayTimes = service.yearlyPrayerTimes(districtCode);
 
         prayTimes.enqueue(new Callback<YearlyPrayerTimes>() {
             @Override
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(@NonNull Call<YearlyPrayerTimes> call, Throwable t) {
+            public void onFailure(@NonNull Call<YearlyPrayerTimes> call, @NonNull Throwable t) {
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
