@@ -1,10 +1,20 @@
 package com.burhanloey.waktusolat;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.burhanloey.waktusolat.services.ESolatService;
+import com.burhanloey.waktusolat.services.YearlyPrayerTimes;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,8 +35,37 @@ public class MainActivity extends AppCompatActivity {
     public void showMessage(View view) {
         Spinner spinner = findViewById(R.id.spinner);
         int position = spinner.getSelectedItemPosition();
-        String selected = districtCodes[position];
+        String districtCode = districtCodes[position];
 
-        Toast.makeText(getApplicationContext(), selected, Toast.LENGTH_SHORT).show();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(ESolatService.URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        ESolatService service = retrofit.create(ESolatService.class);
+
+        Call<YearlyPrayerTimes> prayTimes = service.yearlyPrayTimes(districtCode);
+
+        prayTimes.enqueue(new Callback<YearlyPrayerTimes>() {
+            @Override
+            public void onResponse(@NonNull Call<YearlyPrayerTimes> call,
+                                   @NonNull Response<YearlyPrayerTimes> response) {
+                YearlyPrayerTimes yearlyPrayerTimes = response.body();
+
+                if (yearlyPrayerTimes == null ||
+                        yearlyPrayerTimes.getPrayerTime() == null ||
+                        yearlyPrayerTimes.getPrayerTime().isEmpty()) {
+                    return;
+                }
+
+                String firstPrayerTime = yearlyPrayerTimes.getPrayerTime().get(0).toString();
+                Toast.makeText(getApplicationContext(), firstPrayerTime, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(@NonNull Call<YearlyPrayerTimes> call, Throwable t) {
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
