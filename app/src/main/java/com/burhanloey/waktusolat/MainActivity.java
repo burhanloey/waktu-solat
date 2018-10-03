@@ -1,8 +1,8 @@
 package com.burhanloey.waktusolat;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -10,13 +10,14 @@ import android.widget.Toast;
 import com.burhanloey.waktusolat.services.ESolatService;
 import com.burhanloey.waktusolat.services.YearlyPrayerTimes;
 
+import javax.inject.Inject;
+
+import dagger.android.support.DaggerAppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends DaggerAppCompatActivity {
 
     private final static String[] districtCodes = { "JHR01", "JHR02", "JHR03", "JHR04", "KDH01",
             "KDH02", "KDH03", "KDH04", "KDH05", "KDH06", "KDH07", "KTN01", "KTN03", "MLK01",
@@ -25,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
             "SBH02", "SBH03", "SBH04", "SBH05", "SBH06", "SBH07", "SBH08", "SBH09", "SGR01",
             "SGR02", "SGR03", "SWK01", "SWK02", "SWK03", "SWK04", "SWK05", "SWK06", "SWK07",
             "SWK08", "SWK09", "TRG01", "TRG02", "TRG03", "TRG04", "WLY01", "WLY02" };
+
+    @Inject
+    ESolatService eSolatService;
+
+    @Inject
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +44,7 @@ public class MainActivity extends AppCompatActivity {
         int position = spinner.getSelectedItemPosition();
         String districtCode = districtCodes[position];
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ESolatService.URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ESolatService service = retrofit.create(ESolatService.class);
-
-        Call<YearlyPrayerTimes> prayTimes = service.yearlyPrayerTimes(districtCode);
+        Call<YearlyPrayerTimes> prayTimes = eSolatService.yearlyPrayerTimes(districtCode);
 
         prayTimes.enqueue(new Callback<YearlyPrayerTimes>() {
             @Override
