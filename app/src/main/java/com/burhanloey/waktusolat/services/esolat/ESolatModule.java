@@ -1,7 +1,6 @@
-package com.burhanloey.waktusolat.activities;
+package com.burhanloey.waktusolat.services.esolat;
 
-import com.burhanloey.waktusolat.services.esolat.ESolat;
-import com.burhanloey.waktusolat.services.esolat.ESolatService;
+import com.burhanloey.waktusolat.AppDatabase;
 
 import dagger.Module;
 import dagger.Provides;
@@ -9,7 +8,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
-public class MainModule {
+public class ESolatModule {
     @Provides
     Retrofit provideRetrofit() {
         return new Retrofit.Builder()
@@ -21,5 +20,10 @@ public class MainModule {
     @Provides
     ESolatService provideESolatService(Retrofit retrofit) {
         return retrofit.create(ESolatService.class);
+    }
+
+    @Provides
+    PrayerTimeDao providePrayerTimeDao(AppDatabase appDatabase) {
+        return appDatabase.prayerTimeDao();
     }
 }

@@ -1,6 +1,6 @@
 package com.burhanloey.waktusolat;
 
-import com.burhanloey.waktusolat.activities.MainModule;
+import com.burhanloey.waktusolat.services.esolat.ESolatModule;
 
 import dagger.Component;
 import dagger.android.AndroidInjector;
@@ -10,7 +10,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
         AndroidSupportInjectionModule.class,
         BuildersModule.class,
         AppModule.class,
-        MainModule.class
+        ESolatModule.class
 })
 public interface AppComponent extends AndroidInjector<App> {
     @Component.Builder
