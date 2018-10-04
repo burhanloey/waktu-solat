@@ -1,4 +1,4 @@
-package com.burhanloey.waktusolat;
+package com.burhanloey.waktusolat.activities;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,8 +7,9 @@ import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.burhanloey.waktusolat.services.ESolatService;
-import com.burhanloey.waktusolat.services.YearlyPrayerTimes;
+import com.burhanloey.waktusolat.R;
+import com.burhanloey.waktusolat.services.esolat.ESolatService;
+import com.burhanloey.waktusolat.services.esolat.YearlyPrayerTimes;
 
 import javax.inject.Inject;
 
@@ -59,12 +60,12 @@ public class MainActivity extends DaggerAppCompatActivity {
                 }
 
                 String firstPrayerTime = yearlyPrayerTimes.getPrayerTime().get(0).toString();
-                Toast.makeText(getApplicationContext(), firstPrayerTime, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, firstPrayerTime, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(@NonNull Call<YearlyPrayerTimes> call, @NonNull Throwable t) {
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

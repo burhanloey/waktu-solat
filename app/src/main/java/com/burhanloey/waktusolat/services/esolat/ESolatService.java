@@ -1,4 +1,4 @@
-package com.burhanloey.waktusolat.services;
+package com.burhanloey.waktusolat.services.esolat;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
