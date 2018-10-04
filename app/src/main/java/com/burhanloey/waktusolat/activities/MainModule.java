@@ -1,5 +1,6 @@
 package com.burhanloey.waktusolat.activities;
 
+import com.burhanloey.waktusolat.services.esolat.ESolat;
 import com.burhanloey.waktusolat.services.esolat.ESolatService;
 
 import dagger.Module;
@@ -12,7 +13,7 @@ public class MainModule {
     @Provides
     Retrofit provideRetrofit() {
         return new Retrofit.Builder()
-                .baseUrl(ESolatService.URL)
+                .baseUrl(ESolat.URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
     }
