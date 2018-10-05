@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Waktu Solat</string>
     <string name="fetch">Fetch Data</string>
+    <string name="subuh">Subuh</string>
+    <string name="not_available">Not available</string>
+    <string name="zuhur">Zuhur</string>
+    <string name="asar">Asar</string>
+    <string name="maghrib">Maghrib</string>
+    <string name="isha">Isha\'</string>
     <string-array name="district">
         <item>JHR01 - Pulau Aur dan Pulau Pemanggil</item>
         <item>JHR02 - Johor Bharu, Kota Tinggi, Mersing</item>
