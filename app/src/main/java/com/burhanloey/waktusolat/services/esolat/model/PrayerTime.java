@@ -1,4 +1,4 @@
-package com.burhanloey.waktusolat.services.esolat;
+package com.burhanloey.waktusolat.services.esolat.model;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;

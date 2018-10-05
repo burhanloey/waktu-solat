@@ -9,10 +9,10 @@ import android.widget.Toast;
 
 import com.burhanloey.waktusolat.R;
 import com.burhanloey.waktusolat.services.esolat.ESolat;
-import com.burhanloey.waktusolat.services.esolat.ESolatService;
-import com.burhanloey.waktusolat.services.esolat.PrayerTime;
+import com.burhanloey.waktusolat.services.esolat.ESolatApi;
 import com.burhanloey.waktusolat.services.esolat.PrayerTimeDao;
-import com.burhanloey.waktusolat.services.esolat.YearlyPrayerTimes;
+import com.burhanloey.waktusolat.services.esolat.model.PrayerTime;
+import com.burhanloey.waktusolat.services.esolat.model.YearlyPrayerTimes;
 
 import javax.inject.Inject;
 
@@ -23,7 +23,7 @@ import retrofit2.Response;
 
 public class MainActivity extends DaggerAppCompatActivity {
     @Inject
-    ESolatService eSolatService;
+    ESolatApi eSolatApi;
 
     @Inject
     PrayerTimeDao prayerTimeDao;
@@ -45,9 +45,9 @@ public class MainActivity extends DaggerAppCompatActivity {
         int position = districtCodeSpinner.getSelectedItemPosition();
         final String districtCode = ESolat.getDistrictCode(position);
 
-        Call<YearlyPrayerTimes> prayTimes = eSolatService.yearlyPrayerTimes(districtCode);
+        Call<YearlyPrayerTimes> yearlyPrayerTimes = eSolatApi.yearlyPrayerTimes(districtCode);
 
-        prayTimes.enqueue(new Callback<YearlyPrayerTimes>() {
+        yearlyPrayerTimes.enqueue(new Callback<YearlyPrayerTimes>() {
             @Override
             public void onResponse(@NonNull Call<YearlyPrayerTimes> call,
                                    @NonNull Response<YearlyPrayerTimes> response) {

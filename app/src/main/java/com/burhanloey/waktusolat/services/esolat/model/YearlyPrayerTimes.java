@@ -1,4 +1,4 @@
-package com.burhanloey.waktusolat.services.esolat;
+package com.burhanloey.waktusolat.services.esolat.model;
 
 import java.util.List;
 

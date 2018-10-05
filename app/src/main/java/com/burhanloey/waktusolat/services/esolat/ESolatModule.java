@@ -18,8 +18,8 @@ public class ESolatModule {
     }
 
     @Provides
-    ESolatService provideESolatService(Retrofit retrofit) {
-        return retrofit.create(ESolatService.class);
+    ESolatApi provideESolatApi(Retrofit retrofit) {
+        return retrofit.create(ESolatApi.class);
     }
 
     @Provides

@@ -5,6 +5,8 @@ import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
+import com.burhanloey.waktusolat.services.esolat.model.PrayerTime;
+
 import java.util.List;
 
 @Dao
