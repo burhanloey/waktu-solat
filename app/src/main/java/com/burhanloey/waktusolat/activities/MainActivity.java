@@ -14,7 +14,13 @@ import com.burhanloey.waktusolat.services.esolat.PrayerTimeDao;
 import com.burhanloey.waktusolat.services.esolat.model.PrayerTime;
 import com.burhanloey.waktusolat.services.esolat.model.YearlyPrayerTimes;
 
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.List;
+import java.util.concurrent.ExecutorService;
+
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import dagger.android.support.DaggerAppCompatActivity;
 import retrofit2.Call;
@@ -29,51 +35,82 @@ public class MainActivity extends DaggerAppCompatActivity {
     PrayerTimeDao prayerTimeDao;
 
     @Inject
+    ExecutorService executorService;
+
+    @Inject
+    @Named("date")
+    DateFormat dateFormat;
+
+    @Inject
     Context context;
 
     private Spinner districtCodeSpinner;
+    private PrayerTimesFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (districtCodeSpinner == null) { districtCodeSpinner = findViewById(R.id.spinner); }
+        if (districtCodeSpinner == null) {
+            districtCodeSpinner = findViewById(R.id.spinner);
+        }
+        if (fragment == null) {
+            fragment = (PrayerTimesFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.prayertimes_fragment);
+        }
+    }
+
+    private void toast(final String words) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(context, words, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void savePrayerTimes(final List<PrayerTime> prayerTimes, final String districtCode) {
+        executorService.submit(new Runnable() {
+            @Override
+            public void run() {
+                prayerTimeDao.insertAll(prayerTimes);
+
+                String today = dateFormat.format(new Date());
+                fragment.loadPrayerTime(today, districtCode);
+            }
+        });
     }
 
     public void showMessage(View view) {
         int position = districtCodeSpinner.getSelectedItemPosition();
         final String districtCode = ESolat.getDistrictCode(position);
 
-        Call<YearlyPrayerTimes> yearlyPrayerTimes = eSolatApi.yearlyPrayerTimes(districtCode);
+        eSolatApi.yearlyPrayerTimes(districtCode)
+                .enqueue(new Callback<YearlyPrayerTimes>() {
+                    @Override
+                    public void onResponse(@NonNull Call<YearlyPrayerTimes> call,
+                                           @NonNull Response<YearlyPrayerTimes> response) {
+                        YearlyPrayerTimes yearlyPrayerTimes = response.body();
 
-        yearlyPrayerTimes.enqueue(new Callback<YearlyPrayerTimes>() {
-            @Override
-            public void onResponse(@NonNull Call<YearlyPrayerTimes> call,
-                                   @NonNull Response<YearlyPrayerTimes> response) {
-                YearlyPrayerTimes yearlyPrayerTimes = response.body();
+                        if (yearlyPrayerTimes == null ||
+                                yearlyPrayerTimes.getPrayerTime() == null ||
+                                yearlyPrayerTimes.getPrayerTime().isEmpty()) {
+                            return;
+                        }
 
-                if (yearlyPrayerTimes == null ||
-                        yearlyPrayerTimes.getPrayerTime() == null ||
-                        yearlyPrayerTimes.getPrayerTime().isEmpty()) {
-                    return;
-                }
+                        for (PrayerTime prayerTime : yearlyPrayerTimes.getPrayerTime()) {
+                            prayerTime.setDistrictCode(districtCode);
+                        }
 
-                for (PrayerTime prayerTime : yearlyPrayerTimes.getPrayerTime()) {
-                    prayerTime.setDistrictCode(districtCode);
-                }
+                        savePrayerTimes(yearlyPrayerTimes.getPrayerTime(), districtCode);
+                    }
 
-                prayerTimeDao.insertAll(yearlyPrayerTimes.getPrayerTime());
-
-                PrayerTime firstPrayerTime = prayerTimeDao.findOne("05-Feb-2018", districtCode);
-
-                Toast.makeText(context, firstPrayerTime.toString(), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(@NonNull Call<YearlyPrayerTimes> call, @NonNull Throwable t) {
-                Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+                    @Override
+                    public void onFailure(@NonNull Call<YearlyPrayerTimes> call,
+                                          @NonNull Throwable t) {
+                        toast(t.getMessage());
+                    }
+                });
     }
 }
