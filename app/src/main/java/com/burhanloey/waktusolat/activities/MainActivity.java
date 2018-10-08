@@ -54,11 +54,6 @@ public class MainActivity extends DaggerAppCompatActivity {
         }
     }
 
-    private void loadPrayerTime(int position) {
-        String districtCode = ESolat.getDistrictCode(position);
-        fragment.loadPrayerTime(districtCode);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,7 +65,7 @@ public class MainActivity extends DaggerAppCompatActivity {
         int position = preferences.getInt("position", 0);
 
         districtCodeSpinner.setSelection(position);
-        loadPrayerTime(position);
+        fragment.loadPrayerTime(position);
     }
 
     private void toast(final String words) {
@@ -132,6 +127,6 @@ public class MainActivity extends DaggerAppCompatActivity {
         editor.putInt("position", position);
         editor.apply();
 
-        loadPrayerTime(position);
+        fragment.loadPrayerTime(position);
     }
 }
