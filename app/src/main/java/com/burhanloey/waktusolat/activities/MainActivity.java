@@ -1,7 +1,6 @@
 package com.burhanloey.waktusolat.activities;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
@@ -11,6 +10,7 @@ import com.burhanloey.waktusolat.R;
 import com.burhanloey.waktusolat.services.esolat.ESolat;
 import com.burhanloey.waktusolat.services.esolat.ESolatService;
 import com.burhanloey.waktusolat.services.esolat.tasks.FetchCallback;
+import com.burhanloey.waktusolat.services.state.StateService;
 
 import javax.inject.Inject;
 
@@ -23,6 +23,9 @@ import dagger.android.support.DaggerAppCompatActivity;
 public class MainActivity extends DaggerAppCompatActivity {
     @Inject
     ESolatService eSolatService;
+
+    @Inject
+    StateService stateService;
 
     @Inject
     Context context;
@@ -46,9 +49,7 @@ public class MainActivity extends DaggerAppCompatActivity {
         ButterKnife.bind(this);
         bindFragment();
 
-        SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
-        int position = preferences.getInt("position", 0);
-
+        int position = stateService.getPosition();
         districtCodeSpinner.setSelection(position);
         fragment.loadPrayerTime(position);
     }
@@ -82,10 +83,7 @@ public class MainActivity extends DaggerAppCompatActivity {
 
     @OnItemSelected(R.id.spinner)
     public void savePosition(int position) {
-        SharedPreferences.Editor editor = getPreferences(Context.MODE_PRIVATE).edit();
-        editor.putInt("position", position);
-        editor.apply();
-
+        stateService.setPosition(position);
         fragment.loadPrayerTime(position);
     }
 }

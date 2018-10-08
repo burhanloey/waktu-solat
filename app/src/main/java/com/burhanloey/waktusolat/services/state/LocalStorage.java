@@ -1,0 +1,30 @@
+package com.burhanloey.waktusolat.services.state;
+
+import android.content.Context;
+import android.content.SharedPreferences;
+
+public class LocalStorage {
+    private final static String STORAGE_NAME = "com.burhanloey.waktusolat.Prefs";
+
+    private final Context context;
+
+    public LocalStorage(Context context) {
+        this.context = context;
+    }
+
+    public int getInt(String key, int defValue) {
+        SharedPreferences preferences = context
+                .getSharedPreferences(STORAGE_NAME, Context.MODE_PRIVATE);
+
+        return preferences.getInt(key, defValue);
+    }
+
+    public void putInt(String key, int value) {
+        SharedPreferences.Editor editor = context
+                .getSharedPreferences(STORAGE_NAME, Context.MODE_PRIVATE)
+                .edit();
+
+        editor.putInt(key, value);
+        editor.apply();
+    }
+}
