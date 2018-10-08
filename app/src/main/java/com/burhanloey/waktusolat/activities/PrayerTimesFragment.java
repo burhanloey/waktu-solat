@@ -20,6 +20,8 @@ import java.util.concurrent.ExecutorService;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 
 public class PrayerTimesFragment extends DaggerFragment {
@@ -41,37 +43,29 @@ public class PrayerTimesFragment extends DaggerFragment {
     @Named("time-to")
     DateFormat toDateFormat;
 
-    private TextView subuhTimeTextView;
-    private TextView zuhurTimeTextView;
-    private TextView asarTimeTextView;
-    private TextView maghribTimeTextView;
-    private TextView ishaTimeTextView;
+    @BindView(R.id.subuhtime_textview)
+    TextView subuhTimeTextView;
+
+    @BindView(R.id.zuhurtime_textview)
+    TextView zuhurTimeTextView;
+
+    @BindView(R.id.asartime_textview)
+    TextView asarTimeTextView;
+
+    @BindView(R.id.maghribtime_textview)
+    TextView maghribTimeTextView;
+
+    @BindView(R.id.ishatime_textview)
+    TextView ishaTimeTextView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_prayertimes, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        if (subuhTimeTextView == null) {
-            subuhTimeTextView = view.findViewById(R.id.subuhtime_textview);
-        }
-        if (zuhurTimeTextView == null) {
-            zuhurTimeTextView = view.findViewById(R.id.zuhurtime_textview);
-        }
-        if (asarTimeTextView == null) {
-            asarTimeTextView = view.findViewById(R.id.asartime_textview);
-        }
-        if (maghribTimeTextView == null) {
-            maghribTimeTextView = view.findViewById(R.id.maghribtime_textview);
-        }
-        if (ishaTimeTextView == null) {
-            ishaTimeTextView = view.findViewById(R.id.ishatime_textview);
-        }
+        View view = inflater.inflate(R.layout.fragment_prayertimes, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     private String formatTime(String from) {

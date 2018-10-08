@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -21,6 +20,10 @@ import java.util.concurrent.ExecutorService;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.OnItemSelected;
 import dagger.android.support.DaggerAppCompatActivity;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -39,45 +42,29 @@ public class MainActivity extends DaggerAppCompatActivity {
     @Inject
     Context context;
 
-    private Spinner districtCodeSpinner;
-    private PrayerTimesFragment fragment;
+    @BindView(R.id.spinner)
+    Spinner districtCodeSpinner;
 
-    private void bindView() {
-        if (districtCodeSpinner == null) {
-            districtCodeSpinner = findViewById(R.id.spinner);
-        }
+    PrayerTimesFragment fragment;
+
+    private void bindFragment() {
         if (fragment == null) {
             fragment = (PrayerTimesFragment) getSupportFragmentManager()
                     .findFragmentById(R.id.prayertimes_fragment);
         }
     }
+
     private void loadPrayerTime(int position) {
         String districtCode = ESolat.getDistrictCode(position);
         fragment.loadPrayerTime(districtCode);
-    }
-
-    private void bindBehavior() {
-        districtCodeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SharedPreferences.Editor editor = getPreferences(Context.MODE_PRIVATE).edit();
-                editor.putInt("position", position);
-                editor.apply();
-
-                loadPrayerTime(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
-        });
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bindView();
-        bindBehavior();
+        ButterKnife.bind(this);
+        bindFragment();
 
         SharedPreferences preferences = getPreferences(Context.MODE_PRIVATE);
         int position = preferences.getInt("position", 0);
@@ -110,6 +97,7 @@ public class MainActivity extends DaggerAppCompatActivity {
         });
     }
 
+    @OnClick(R.id.fetch_button)
     public void fetch(View view) {
         int position = districtCodeSpinner.getSelectedItemPosition();
         final String districtCode = ESolat.getDistrictCode(position);
@@ -136,5 +124,14 @@ public class MainActivity extends DaggerAppCompatActivity {
                         toast(t.getMessage());
                     }
                 });
+    }
+
+    @OnItemSelected(R.id.spinner)
+    public void savePosition(int position) {
+        SharedPreferences.Editor editor = getPreferences(Context.MODE_PRIVATE).edit();
+        editor.putInt("position", position);
+        editor.apply();
+
+        loadPrayerTime(position);
     }
 }
