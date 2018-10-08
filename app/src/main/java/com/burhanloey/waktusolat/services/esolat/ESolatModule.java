@@ -1,6 +1,6 @@
 package com.burhanloey.waktusolat.services.esolat;
 
-import com.burhanloey.waktusolat.AppDatabase;
+import com.burhanloey.waktusolat.services.storage.AppDatabase;
 import com.burhanloey.waktusolat.services.timeformat.TimeFormatService;
 
 import java.util.concurrent.ExecutorService;

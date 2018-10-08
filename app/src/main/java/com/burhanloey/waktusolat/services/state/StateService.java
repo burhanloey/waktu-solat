@@ -1,5 +1,7 @@
 package com.burhanloey.waktusolat.services.state;
 
+import com.burhanloey.waktusolat.services.storage.LocalStorage;
+
 public class StateService {
     private final LocalStorage localStorage;
 

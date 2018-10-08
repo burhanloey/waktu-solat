@@ -1,4 +1,4 @@
-package com.burhanloey.waktusolat.services.state;
+package com.burhanloey.waktusolat.services.storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
