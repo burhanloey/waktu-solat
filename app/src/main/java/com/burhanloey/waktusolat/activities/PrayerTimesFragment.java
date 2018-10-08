@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.burhanloey.waktusolat.R;
-import com.burhanloey.waktusolat.services.esolat.ESolat;
 import com.burhanloey.waktusolat.services.esolat.PrayerTimeDao;
 import com.burhanloey.waktusolat.services.esolat.model.PrayerTime;
 
