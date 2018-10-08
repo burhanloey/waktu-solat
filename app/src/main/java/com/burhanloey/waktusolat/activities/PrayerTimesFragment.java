@@ -49,22 +49,30 @@ public class PrayerTimesFragment extends DaggerFragment {
         return view;
     }
 
+    private void update(PrayerTime prayerTime) {
+        List<String> time = timeFormatService.formatPrayerTime(prayerTime);
+
+        for (int i = 0; i < time.size(); i++) {
+            timeTextViews.get(i).setText(time.get(i));
+        }
+    }
+
+    private void clear() {
+        for (TextView textView : timeTextViews) {
+            textView.setText(R.string.not_available);
+        }
+    }
+
     public void loadPrayerTime(final String districtCode) {
         eSolatService.load(districtCode, new LoadCallback() {
             @Override
             public void onResponse(PrayerTime prayerTime) {
-                List<String> time = timeFormatService.formatPrayerTime(prayerTime);
-
-                for (int i = 0; i < time.size(); i++) {
-                    timeTextViews.get(i).setText(time.get(i));
-                }
+                update(prayerTime);
             }
 
             @Override
             public void onMissingData() {
-                for (TextView textView : timeTextViews) {
-                    textView.setText(R.string.not_available);
-                }
+                clear();
             }
         });
     }
