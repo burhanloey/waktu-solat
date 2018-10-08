@@ -1,14 +1,9 @@
 package com.burhanloey.waktusolat.services.esolat;
 
-import android.annotation.SuppressLint;
+import com.burhanloey.waktusolat.services.storage.AppDatabase;
+import com.burhanloey.waktusolat.services.timeformat.TimeFormatService;
 
-import com.burhanloey.waktusolat.AppDatabase;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-
-import javax.inject.Named;
+import java.util.concurrent.ExecutorService;
 
 import dagger.Module;
 import dagger.Provides;
@@ -36,28 +31,10 @@ public class ESolatModule {
     }
 
     @Provides
-    @Named("ms-my")
-    Locale provideLocale() {
-        return new Locale("ms", "my");
-    }
-
-    @Provides
-    @Named("date")
-    DateFormat provideDateFormatforDate(@Named("ms-my") Locale locale) {
-        return new SimpleDateFormat("dd-MMM-yyyy", locale);
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    @Provides
-    @Named("time-from")
-    DateFormat provideDateFormatforFromTime() {
-        return new SimpleDateFormat("HH:mm:ss");
-    }
-
-    @SuppressLint("SimpleDateFormat")
-    @Provides
-    @Named("time-to")
-    DateFormat provideDateFormatforToTime() {
-        return new SimpleDateFormat("hh:mm aaa");
+    ESolatService provideESolatService(ESolatApi eSolatApi,
+                                       PrayerTimeDao prayerTimeDao,
+                                       TimeFormatService timeFormatService,
+                                       ExecutorService executorService) {
+        return new ESolatService(eSolatApi, prayerTimeDao, timeFormatService, executorService);
     }
 }

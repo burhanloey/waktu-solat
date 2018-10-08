@@ -1,4 +1,4 @@
-package com.burhanloey.waktusolat;
+package com.burhanloey.waktusolat.services.storage;
 
 import android.arch.persistence.room.Database;
 import android.arch.persistence.room.RoomDatabase;

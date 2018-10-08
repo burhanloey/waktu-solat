@@ -9,119 +9,76 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.burhanloey.waktusolat.R;
-import com.burhanloey.waktusolat.services.esolat.PrayerTimeDao;
+import com.burhanloey.waktusolat.services.esolat.ESolat;
+import com.burhanloey.waktusolat.services.esolat.ESolatService;
 import com.burhanloey.waktusolat.services.esolat.model.PrayerTime;
+import com.burhanloey.waktusolat.services.esolat.tasks.LoadCallback;
+import com.burhanloey.waktusolat.services.timeformat.TimeFormatService;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.util.Date;
-import java.util.concurrent.ExecutorService;
+import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
+import butterknife.BindViews;
+import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 
 public class PrayerTimesFragment extends DaggerFragment {
     @Inject
-    PrayerTimeDao prayerTimeDao;
+    ESolatService eSolatService;
 
     @Inject
-    ExecutorService executorService;
+    TimeFormatService timeFormatService;
 
-    @Inject
-    @Named("date")
-    DateFormat dateFormat;
-
-    @Inject
-    @Named("time-from")
-    DateFormat fromDateFormat;
-
-    @Inject
-    @Named("time-to")
-    DateFormat toDateFormat;
-
-    private TextView subuhTimeTextView;
-    private TextView zuhurTimeTextView;
-    private TextView asarTimeTextView;
-    private TextView maghribTimeTextView;
-    private TextView ishaTimeTextView;
+    @BindViews({
+            R.id.subuhtime_textview,
+            R.id.zuhurtime_textview,
+            R.id.asartime_textview,
+            R.id.maghribtime_textview,
+            R.id.ishatime_textview
+    })
+    List<TextView> timeTextViews;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_prayertimes, container, false);
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        if (subuhTimeTextView == null) {
-            subuhTimeTextView = view.findViewById(R.id.subuhtime_textview);
-        }
-        if (zuhurTimeTextView == null) {
-            zuhurTimeTextView = view.findViewById(R.id.zuhurtime_textview);
-        }
-        if (asarTimeTextView == null) {
-            asarTimeTextView = view.findViewById(R.id.asartime_textview);
-        }
-        if (maghribTimeTextView == null) {
-            maghribTimeTextView = view.findViewById(R.id.maghribtime_textview);
-        }
-        if (ishaTimeTextView == null) {
-            ishaTimeTextView = view.findViewById(R.id.ishatime_textview);
-        }
-    }
-
-    private String formatTime(String from) {
-        try {
-            Date date = fromDateFormat.parse(from);
-            return toDateFormat.format(date);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return from;
+        View view = inflater.inflate(R.layout.fragment_prayertimes, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     private void update(PrayerTime prayerTime) {
-        String fajrTime = formatTime(prayerTime.getFajr());
-        subuhTimeTextView.setText(fajrTime);
+        List<String> time = timeFormatService.formatPrayerTime(prayerTime);
 
-        String dhuhrTime = formatTime(prayerTime.getDhuhr());
-        zuhurTimeTextView.setText(dhuhrTime);
-
-        String asrTime = formatTime(prayerTime.getAsr());
-        asarTimeTextView.setText(asrTime);
-
-        String maghribTime = formatTime(prayerTime.getMaghrib());
-        maghribTimeTextView.setText(maghribTime);
-
-        String ishaTime = formatTime(prayerTime.getIsha());
-        ishaTimeTextView.setText(ishaTime);
+        for (int i = 0; i < time.size(); i++) {
+            timeTextViews.get(i).setText(time.get(i));
+        }
     }
 
     private void clear() {
-        subuhTimeTextView.setText(R.string.not_available);
-        zuhurTimeTextView.setText(R.string.not_available);
-        asarTimeTextView.setText(R.string.not_available);
-        maghribTimeTextView.setText(R.string.not_available);
-        ishaTimeTextView.setText(R.string.not_available);
+        for (TextView textView : timeTextViews) {
+            textView.setText(R.string.not_available);
+        }
     }
 
     public void loadPrayerTime(final String districtCode) {
-        executorService.submit(new Runnable() {
+        eSolatService.load(districtCode, new LoadCallback() {
             @Override
-            public void run() {
-                String today = dateFormat.format(new Date());
-                PrayerTime prayerTime = prayerTimeDao.find(today, districtCode);
+            public void onResponse(PrayerTime prayerTime) {
+                update(prayerTime);
+            }
 
-                if (prayerTime == null) {
-                    clear();
-                } else {
-                    update(prayerTime);
-                }
+            @Override
+            public void onMissingData() {
+                clear();
             }
         });
+    }
+
+    public void loadPrayerTime(int position) {
+        String districtCode = ESolat.getDistrictCode(position);
+        loadPrayerTime(districtCode);
     }
 }
