@@ -10,12 +10,12 @@ import android.widget.TextView;
 
 import com.burhanloey.waktusolat.R;
 import com.burhanloey.waktusolat.services.esolat.ESolat;
-import com.burhanloey.waktusolat.services.esolat.PrayerTimeDao;
+import com.burhanloey.waktusolat.services.esolat.ESolatService;
 import com.burhanloey.waktusolat.services.esolat.model.PrayerTime;
+import com.burhanloey.waktusolat.services.esolat.tasks.LoadCallback;
 import com.burhanloey.waktusolat.services.timeformat.TimeFormatService;
 
 import java.util.List;
-import java.util.concurrent.ExecutorService;
 
 import javax.inject.Inject;
 
@@ -25,10 +25,7 @@ import dagger.android.support.DaggerFragment;
 
 public class PrayerTimesFragment extends DaggerFragment {
     @Inject
-    PrayerTimeDao prayerTimeDao;
-
-    @Inject
-    ExecutorService executorService;
+    ESolatService eSolatService;
 
     @Inject
     TimeFormatService timeFormatService;
@@ -52,31 +49,21 @@ public class PrayerTimesFragment extends DaggerFragment {
         return view;
     }
 
-    private void update(PrayerTime prayerTime) {
-        List<String> time = timeFormatService.formatPrayerTime(prayerTime);
-
-        for (int i = 0; i < time.size(); i++) {
-            timeTextViews.get(i).setText(time.get(i));
-        }
-    }
-
-    private void clear() {
-        for (TextView textView : timeTextViews) {
-            textView.setText(R.string.not_available);
-        }
-    }
-
     public void loadPrayerTime(final String districtCode) {
-        executorService.submit(new Runnable() {
+        eSolatService.load(districtCode, new LoadCallback() {
             @Override
-            public void run() {
-                String today = timeFormatService.today();
-                PrayerTime prayerTime = prayerTimeDao.find(today, districtCode);
+            public void onResponse(PrayerTime prayerTime) {
+                List<String> time = timeFormatService.formatPrayerTime(prayerTime);
 
-                if (prayerTime == null) {
-                    clear();
-                } else {
-                    update(prayerTime);
+                for (int i = 0; i < time.size(); i++) {
+                    timeTextViews.get(i).setText(time.get(i));
+                }
+            }
+
+            @Override
+            public void onMissingData() {
+                for (TextView textView : timeTextViews) {
+                    textView.setText(R.string.not_available);
                 }
             }
         });

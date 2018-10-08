@@ -3,20 +3,14 @@ package com.burhanloey.waktusolat.activities;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.burhanloey.waktusolat.R;
 import com.burhanloey.waktusolat.services.esolat.ESolat;
-import com.burhanloey.waktusolat.services.esolat.ESolatApi;
-import com.burhanloey.waktusolat.services.esolat.PrayerTimeDao;
-import com.burhanloey.waktusolat.services.esolat.model.PrayerTime;
-import com.burhanloey.waktusolat.services.esolat.model.YearlyPrayerTimes;
-
-import java.util.List;
-import java.util.concurrent.ExecutorService;
+import com.burhanloey.waktusolat.services.esolat.ESolatService;
+import com.burhanloey.waktusolat.services.esolat.tasks.FetchCallback;
 
 import javax.inject.Inject;
 
@@ -25,19 +19,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import dagger.android.support.DaggerAppCompatActivity;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class MainActivity extends DaggerAppCompatActivity {
     @Inject
-    ESolatApi eSolatApi;
-
-    @Inject
-    PrayerTimeDao prayerTimeDao;
-
-    @Inject
-    ExecutorService executorService;
+    ESolatService eSolatService;
 
     @Inject
     Context context;
@@ -77,48 +62,22 @@ public class MainActivity extends DaggerAppCompatActivity {
         });
     }
 
-    private void savePrayerTimes(final List<PrayerTime> prayerTimes, final String districtCode) {
-        executorService.submit(new Runnable() {
-            @Override
-            public void run() {
-                for (PrayerTime prayerTime : prayerTimes) {
-                    prayerTime.setDistrictCode(districtCode);
-                }
-
-                prayerTimeDao.insertAll(prayerTimes);
-
-                fragment.loadPrayerTime(districtCode);
-            }
-        });
-    }
-
     @OnClick(R.id.fetch_button)
     public void fetch(View view) {
         int position = districtCodeSpinner.getSelectedItemPosition();
         final String districtCode = ESolat.getDistrictCode(position);
 
-        eSolatApi.yearlyPrayerTimes(districtCode)
-                .enqueue(new Callback<YearlyPrayerTimes>() {
-                    @Override
-                    public void onResponse(@NonNull Call<YearlyPrayerTimes> call,
-                                           @NonNull Response<YearlyPrayerTimes> response) {
-                        YearlyPrayerTimes yearlyPrayerTimes = response.body();
+        eSolatService.fetch(districtCode, new FetchCallback() {
+            @Override
+            public void onSuccess() {
+                fragment.loadPrayerTime(districtCode);
+            }
 
-                        if (yearlyPrayerTimes == null ||
-                                yearlyPrayerTimes.getPrayerTime() == null ||
-                                yearlyPrayerTimes.getPrayerTime().isEmpty()) {
-                            return;
-                        }
-
-                        savePrayerTimes(yearlyPrayerTimes.getPrayerTime(), districtCode);
-                    }
-
-                    @Override
-                    public void onFailure(@NonNull Call<YearlyPrayerTimes> call,
-                                          @NonNull Throwable t) {
-                        toast(t.getMessage());
-                    }
-                });
+            @Override
+            public void onFailure(String message) {
+                toast(message);
+            }
+        });
     }
 
     @OnItemSelected(R.id.spinner)
