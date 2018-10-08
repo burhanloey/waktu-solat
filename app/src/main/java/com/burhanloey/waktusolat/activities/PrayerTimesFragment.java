@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.burhanloey.waktusolat.R;
+import com.burhanloey.waktusolat.services.esolat.ESolat;
 import com.burhanloey.waktusolat.services.esolat.PrayerTimeDao;
 import com.burhanloey.waktusolat.services.esolat.model.PrayerTime;
 
@@ -28,6 +29,10 @@ public class PrayerTimesFragment extends DaggerFragment {
 
     @Inject
     ExecutorService executorService;
+
+    @Inject
+    @Named("date")
+    DateFormat dateFormat;
 
     @Inject
     @Named("time-from")
@@ -97,13 +102,24 @@ public class PrayerTimesFragment extends DaggerFragment {
         ishaTimeTextView.setText(ishaTime);
     }
 
-    public void loadPrayerTime(final String date, final String districtCode) {
+    private void clear() {
+        subuhTimeTextView.setText(R.string.not_available);
+        zuhurTimeTextView.setText(R.string.not_available);
+        asarTimeTextView.setText(R.string.not_available);
+        maghribTimeTextView.setText(R.string.not_available);
+        ishaTimeTextView.setText(R.string.not_available);
+    }
+
+    public void loadPrayerTime(final String districtCode) {
         executorService.submit(new Runnable() {
             @Override
             public void run() {
-                PrayerTime prayerTime = prayerTimeDao.find(date, districtCode);
+                String today = dateFormat.format(new Date());
+                PrayerTime prayerTime = prayerTimeDao.find(today, districtCode);
 
-                if (prayerTime != null) {
+                if (prayerTime == null) {
+                    clear();
+                } else {
                     update(prayerTime);
                 }
             }
