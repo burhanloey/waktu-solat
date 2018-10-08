@@ -101,7 +101,7 @@ public class PrayerTimesFragment extends DaggerFragment {
         executorService.submit(new Runnable() {
             @Override
             public void run() {
-                PrayerTime prayerTime = prayerTimeDao.findOne(date, districtCode);
+                PrayerTime prayerTime = prayerTimeDao.find(date, districtCode);
 
                 if (prayerTime != null) {
                     update(prayerTime);

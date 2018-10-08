@@ -12,7 +12,7 @@ import java.util.List;
 @Dao
 public interface PrayerTimeDao {
     @Query("SELECT * FROM prayertime WHERE date = :date AND districtCode = :districtCode")
-    PrayerTime findOne(String date, String districtCode);
+    PrayerTime find(String date, String districtCode);
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertAll(List<PrayerTime> prayerTimes);

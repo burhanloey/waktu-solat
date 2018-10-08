@@ -74,6 +74,10 @@ public class MainActivity extends DaggerAppCompatActivity {
         executorService.submit(new Runnable() {
             @Override
             public void run() {
+                for (PrayerTime prayerTime : prayerTimes) {
+                    prayerTime.setDistrictCode(districtCode);
+                }
+
                 prayerTimeDao.insertAll(prayerTimes);
 
                 String today = dateFormat.format(new Date());
@@ -82,7 +86,7 @@ public class MainActivity extends DaggerAppCompatActivity {
         });
     }
 
-    public void showMessage(View view) {
+    public void fetch(View view) {
         int position = districtCodeSpinner.getSelectedItemPosition();
         final String districtCode = ESolat.getDistrictCode(position);
 
@@ -97,10 +101,6 @@ public class MainActivity extends DaggerAppCompatActivity {
                                 yearlyPrayerTimes.getPrayerTime() == null ||
                                 yearlyPrayerTimes.getPrayerTime().isEmpty()) {
                             return;
-                        }
-
-                        for (PrayerTime prayerTime : yearlyPrayerTimes.getPrayerTime()) {
-                            prayerTime.setDistrictCode(districtCode);
                         }
 
                         savePrayerTimes(yearlyPrayerTimes.getPrayerTime(), districtCode);
