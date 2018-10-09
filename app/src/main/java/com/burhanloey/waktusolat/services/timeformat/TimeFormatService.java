@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * A service to format time and date.
+ */
 public class TimeFormatService {
     private final DateFormat dateFormat;
     private final DateFormat fromDateFormat;
@@ -21,6 +24,9 @@ public class TimeFormatService {
         this.toDateFormat = toDateFormat;
     }
 
+    /**
+     * Format time from military to AM/PM.
+     */
     private String formatTime(String from) {
         try {
             Date date = fromDateFormat.parse(from);
@@ -31,6 +37,13 @@ public class TimeFormatService {
         return from;
     }
 
+    /**
+     * Format Subuh, Zuhur, Asar, Maghrib, and Isha' prayer times. This returns List to match the
+     * Collection used to group the TextViews by ButterKnife.
+     *
+     * @param prayerTime Raw PrayerTime data in military
+     * @return List of AM/PM prayer time strings
+     */
     public List<String> formatPrayerTime(PrayerTime prayerTime) {
         List<String> formatted = new ArrayList<>(5);
         formatted.add(formatTime(prayerTime.getFajr()));
@@ -42,6 +55,11 @@ public class TimeFormatService {
         return formatted;
     }
 
+    /**
+     * Get today's date formatted to match the date from ESolat API.
+     *
+     * @return Today's date
+     */
     public String today() {
         return dateFormat.format(new Date());
     }

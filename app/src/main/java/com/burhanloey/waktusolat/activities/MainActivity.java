@@ -82,7 +82,7 @@ public class MainActivity extends DaggerAppCompatActivity {
     }
 
     @OnItemSelected(R.id.spinner)
-    public void savePosition(int position) {
+    public void load(int position) {
         stateService.setPosition(position);
         fragment.loadPrayerTime(position);
     }

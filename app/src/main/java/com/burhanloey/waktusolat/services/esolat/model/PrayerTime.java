@@ -7,6 +7,9 @@ import android.arch.persistence.room.PrimaryKey;
 
 import lombok.Data;
 
+/**
+ * A model that is used during both ESolat API and database operations for prayer time.
+ */
 @Entity(tableName = "prayertime",
         indices = {@Index(value = {"districtCode", "date"}, unique = true)})
 @Data
