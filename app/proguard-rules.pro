@@ -39,3 +39,9 @@
 
 # Top-level functions that can only be used by Kotlin.
 -dontwarn retrofit2.-KotlinExtensions
+
+# https://readyandroid.wordpress.com/errorexecution-failed-for-task-apptransformclassesandresourceswithproguardforrelease/
+-ignorewarnings
+-keep class * {
+    public private *;
+}
