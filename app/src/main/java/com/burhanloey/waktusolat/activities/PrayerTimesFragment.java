@@ -64,7 +64,7 @@ public class PrayerTimesFragment extends DaggerFragment {
     }
 
     public void loadPrayerTime(final String districtCode) {
-        eSolatService.load(districtCode, new LoadCallback() {
+        eSolatService.load(getActivity(), districtCode, new LoadCallback() {
             @Override
             public void onResponse(PrayerTime prayerTime) {
                 update(prayerTime);

@@ -68,7 +68,7 @@ public class MainActivity extends DaggerAppCompatActivity {
         int position = districtCodeSpinner.getSelectedItemPosition();
         final String districtCode = ESolat.getDistrictCode(position);
 
-        eSolatService.fetch(districtCode, new FetchCallback() {
+        eSolatService.fetch(this, districtCode, new FetchCallback() {
             @Override
             public void onSuccess() {
                 fragment.loadPrayerTime(districtCode);

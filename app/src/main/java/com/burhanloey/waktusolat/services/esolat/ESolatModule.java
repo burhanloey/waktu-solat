@@ -3,8 +3,6 @@ package com.burhanloey.waktusolat.services.esolat;
 import com.burhanloey.waktusolat.services.storage.AppDatabase;
 import com.burhanloey.waktusolat.services.timeformat.TimeFormatService;
 
-import java.util.concurrent.ExecutorService;
-
 import dagger.Module;
 import dagger.Provides;
 import retrofit2.Retrofit;
@@ -33,8 +31,7 @@ public class ESolatModule {
     @Provides
     ESolatService provideESolatService(ESolatApi eSolatApi,
                                        PrayerTimeDao prayerTimeDao,
-                                       TimeFormatService timeFormatService,
-                                       ExecutorService executorService) {
-        return new ESolatService(eSolatApi, prayerTimeDao, timeFormatService, executorService);
+                                       TimeFormatService timeFormatService) {
+        return new ESolatService(eSolatApi, prayerTimeDao, timeFormatService);
     }
 }
