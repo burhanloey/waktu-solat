@@ -31,6 +31,10 @@ public class ESolatService {
         this.executorService = executorService;
     }
 
+    /**
+     * Save downloaded prayer times into database. Don't forget to associate district code for each
+     * of the data.
+     */
     private void savePrayerTimes(final List<PrayerTime> prayerTimes,
                                  final String districtCode,
                                  final FetchCallback callback) {
@@ -48,6 +52,13 @@ public class ESolatService {
         });
     }
 
+    /**
+     * Fetch data from API, and then save to database. Supply FetchCallback for things to do during
+     * API failure, and after success.
+     *
+     * @param districtCode District code for which data to fetch for
+     * @param callback FetchCallback for API failure and on success
+     */
     public void fetch(final String districtCode, final FetchCallback callback) {
         eSolatApi.yearlyPrayerTimes(districtCode)
                 .enqueue(new Callback<YearlyPrayerTimes>() {
@@ -73,6 +84,13 @@ public class ESolatService {
                 });
     }
 
+    /**
+     * Load today's prayer time from database. Supply LoadCallback for things to do on response and
+     * on missing data.
+     *
+     * @param districtCode District code for which data to load for
+     * @param callback LoadCallback on response and on missing data
+     */
     public void load(final String districtCode, final LoadCallback callback) {
         executorService.submit(new Runnable() {
             @Override

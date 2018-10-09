@@ -11,6 +11,12 @@ public final class ESolat {
             "SGR02", "SGR03", "SWK01", "SWK02", "SWK03", "SWK04", "SWK05", "SWK06", "SWK07",
             "SWK08", "SWK09", "TRG01", "TRG02", "TRG03", "TRG04", "WLY01", "WLY02" };
 
+    /**
+     * Get district code from the position of spinner.
+     *
+     * @param position Spinner position
+     * @return District code
+     */
     public static String getDistrictCode(int position) {
         return DISTRICT_CODES[position];
     }

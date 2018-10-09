@@ -11,9 +11,22 @@ import java.util.List;
 
 @Dao
 public interface PrayerTimeDao {
+    /**
+     * Find prayer time given the date and district code.
+     *
+     * @param date Date. Refer TimeFormatModule for reference on the format.
+     * @param districtCode District code. Refer ESolat for reference.
+     * @return Prayer time
+     */
     @Query("SELECT * FROM prayertime WHERE date = :date AND districtCode = :districtCode")
     PrayerTime find(String date, String districtCode);
 
+    /**
+     * Insert a list of prayer times into the database. If the data already exists, they will be
+     * ignored.
+     *
+     * @param prayerTimes List of prayer times.
+     */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     void insertAll(List<PrayerTime> prayerTimes);
 }
