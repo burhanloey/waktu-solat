@@ -30,7 +30,7 @@ public class ESolatService {
 
     /**
      * Save downloaded prayer times into database. Don't forget to associate district code for each
-     * of the data.
+     * of the data. Also, the callback should be run on UI thread.
      */
     private void savePrayerTimes(final Activity activity,
                                  final List<PrayerTime> prayerTimes,
@@ -57,7 +57,7 @@ public class ESolatService {
 
     /**
      * Fetch data from API, and then save to database. Supply FetchCallback for things to do during
-     * API failure, and after success.
+     * API failure, and after success. The callbacks will run on UI thread.
      *
      * @param activity Activity where this method is called
      * @param districtCode District code for which data to fetch for
@@ -102,7 +102,7 @@ public class ESolatService {
 
     /**
      * Load today's prayer time from database. Supply LoadCallback for things to do on response and
-     * on missing data.
+     * on missing data. The callbacks will run on UI thread.
      *
      * @param activity Activity where this method is called
      * @param districtCode District code for which data to load for

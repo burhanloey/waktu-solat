@@ -54,15 +54,6 @@ public class MainActivity extends DaggerAppCompatActivity {
         fragment.loadPrayerTime(position);
     }
 
-    private void toast(final String words) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(context, words, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
     @OnClick(R.id.fetch_button)
     public void fetch(View view) {
         int position = districtCodeSpinner.getSelectedItemPosition();
@@ -76,7 +67,7 @@ public class MainActivity extends DaggerAppCompatActivity {
 
             @Override
             public void onFailure(String message) {
-                toast(message);
+                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         });
     }
