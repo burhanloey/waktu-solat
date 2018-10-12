@@ -7,7 +7,7 @@ import com.burhanloey.waktusolat.services.esolat.model.PrayerTime;
 import com.burhanloey.waktusolat.services.esolat.model.YearlyPrayerTimes;
 import com.burhanloey.waktusolat.services.esolat.tasks.FetchCallback;
 import com.burhanloey.waktusolat.services.esolat.tasks.LoadCallback;
-import com.burhanloey.waktusolat.services.timeformat.TimeFormatService;
+import com.burhanloey.waktusolat.services.timeformat.TimeFormatter;
 
 import java.util.List;
 
@@ -18,14 +18,14 @@ import retrofit2.Response;
 public class ESolatService {
     private final ESolatApi eSolatApi;
     private final PrayerTimeDao prayerTimeDao;
-    private final TimeFormatService timeFormatService;
+    private final TimeFormatter timeFormatter;
 
     public ESolatService(ESolatApi eSolatApi,
                          PrayerTimeDao prayerTimeDao,
-                         TimeFormatService timeFormatService) {
+                         TimeFormatter timeFormatter) {
         this.eSolatApi = eSolatApi;
         this.prayerTimeDao = prayerTimeDao;
-        this.timeFormatService = timeFormatService;
+        this.timeFormatter = timeFormatter;
     }
 
     /**
@@ -114,7 +114,7 @@ public class ESolatService {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                String today = timeFormatService.today();
+                String today = timeFormatter.today();
                 final PrayerTime prayerTime = prayerTimeDao.find(today, districtCode);
 
                 activity.runOnUiThread(new Runnable() {

@@ -5,10 +5,10 @@ import com.burhanloey.waktusolat.services.storage.LocalStorage;
 /**
  * A service to store/retrieve application state.
  */
-public class StateService {
+public class StateManager {
     private final LocalStorage localStorage;
 
-    public StateService(LocalStorage localStorage) {
+    public StateManager(LocalStorage localStorage) {
         this.localStorage = localStorage;
     }
 

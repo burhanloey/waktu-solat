@@ -40,9 +40,9 @@ public class TimeFormatModule {
     }
 
     @Provides
-    TimeFormatService provideTimeFormatService(@Named("date") DateFormat dateFormat,
-                                               @Named("time-from") DateFormat fromDateFormat,
-                                               @Named("time-to") DateFormat toDateFormat) {
-        return new TimeFormatService(dateFormat, fromDateFormat, toDateFormat);
+    TimeFormatter provideTimeFormatter(@Named("date") DateFormat dateFormat,
+                                       @Named("time-from") DateFormat fromDateFormat,
+                                       @Named("time-to") DateFormat toDateFormat) {
+        return new TimeFormatter(dateFormat, fromDateFormat, toDateFormat);
     }
 }

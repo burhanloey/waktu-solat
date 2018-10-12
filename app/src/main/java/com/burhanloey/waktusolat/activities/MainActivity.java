@@ -10,7 +10,7 @@ import com.burhanloey.waktusolat.R;
 import com.burhanloey.waktusolat.services.esolat.ESolat;
 import com.burhanloey.waktusolat.services.esolat.ESolatService;
 import com.burhanloey.waktusolat.services.esolat.tasks.FetchCallback;
-import com.burhanloey.waktusolat.services.state.StateService;
+import com.burhanloey.waktusolat.services.state.StateManager;
 
 import javax.inject.Inject;
 
@@ -25,7 +25,7 @@ public class MainActivity extends DaggerAppCompatActivity {
     ESolatService eSolatService;
 
     @Inject
-    StateService stateService;
+    StateManager stateManager;
 
     @Inject
     Context context;
@@ -49,7 +49,7 @@ public class MainActivity extends DaggerAppCompatActivity {
         ButterKnife.bind(this);
         bindFragment();
 
-        int position = stateService.getPosition();
+        int position = stateManager.getPosition();
         districtCodeSpinner.setSelection(position);
         fragment.loadPrayerTime(position);
     }
@@ -74,7 +74,7 @@ public class MainActivity extends DaggerAppCompatActivity {
 
     @OnItemSelected(R.id.spinner)
     public void load(int position) {
-        stateService.setPosition(position);
+        stateManager.setPosition(position);
         fragment.loadPrayerTime(position);
     }
 }

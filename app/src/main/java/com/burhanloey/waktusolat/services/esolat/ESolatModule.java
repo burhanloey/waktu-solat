@@ -1,7 +1,7 @@
 package com.burhanloey.waktusolat.services.esolat;
 
 import com.burhanloey.waktusolat.services.storage.AppDatabase;
-import com.burhanloey.waktusolat.services.timeformat.TimeFormatService;
+import com.burhanloey.waktusolat.services.timeformat.TimeFormatter;
 
 import dagger.Module;
 import dagger.Provides;
@@ -31,7 +31,7 @@ public class ESolatModule {
     @Provides
     ESolatService provideESolatService(ESolatApi eSolatApi,
                                        PrayerTimeDao prayerTimeDao,
-                                       TimeFormatService timeFormatService) {
-        return new ESolatService(eSolatApi, prayerTimeDao, timeFormatService);
+                                       TimeFormatter timeFormatter) {
+        return new ESolatService(eSolatApi, prayerTimeDao, timeFormatter);
     }
 }

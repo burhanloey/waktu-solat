@@ -8,7 +8,7 @@ import dagger.Provides;
 @Module
 public class StateModule {
     @Provides
-    StateService provideStateService(LocalStorage localStorage) {
-        return new StateService(localStorage);
+    StateManager provideStateManager(LocalStorage localStorage) {
+        return new StateManager(localStorage);
     }
 }

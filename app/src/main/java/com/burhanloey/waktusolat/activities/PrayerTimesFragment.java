@@ -13,7 +13,7 @@ import com.burhanloey.waktusolat.services.esolat.ESolat;
 import com.burhanloey.waktusolat.services.esolat.ESolatService;
 import com.burhanloey.waktusolat.services.esolat.model.PrayerTime;
 import com.burhanloey.waktusolat.services.esolat.tasks.LoadCallback;
-import com.burhanloey.waktusolat.services.timeformat.TimeFormatService;
+import com.burhanloey.waktusolat.services.timeformat.TimeFormatter;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class PrayerTimesFragment extends DaggerFragment {
     ESolatService eSolatService;
 
     @Inject
-    TimeFormatService timeFormatService;
+    TimeFormatter timeFormatter;
 
     @BindViews({
             R.id.subuhtime_textview,
@@ -50,7 +50,7 @@ public class PrayerTimesFragment extends DaggerFragment {
     }
 
     private void update(PrayerTime prayerTime) {
-        List<String> time = timeFormatService.formatPrayerTime(prayerTime);
+        List<String> time = timeFormatter.formatPrayerTime(prayerTime);
 
         for (int i = 0; i < time.size(); i++) {
             timeTextViews.get(i).setText(time.get(i));

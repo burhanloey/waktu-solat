@@ -11,14 +11,14 @@ import java.util.List;
 /**
  * A service to format time and date.
  */
-public class TimeFormatService {
+public class TimeFormatter {
     private final DateFormat dateFormat;
     private final DateFormat fromDateFormat;
     private final DateFormat toDateFormat;
 
-    public TimeFormatService(DateFormat dateFormat,
-                             DateFormat fromDateFormat,
-                             DateFormat toDateFormat) {
+    public TimeFormatter(DateFormat dateFormat,
+                         DateFormat fromDateFormat,
+                         DateFormat toDateFormat) {
         this.dateFormat = dateFormat;
         this.fromDateFormat = fromDateFormat;
         this.toDateFormat = toDateFormat;
