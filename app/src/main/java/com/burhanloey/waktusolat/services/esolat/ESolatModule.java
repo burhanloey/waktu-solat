@@ -1,5 +1,6 @@
 package com.burhanloey.waktusolat.services.esolat;
 
+import com.burhanloey.waktusolat.services.esolat.tasks.TaskManager;
 import com.burhanloey.waktusolat.services.storage.AppDatabase;
 import com.burhanloey.waktusolat.services.timeformat.TimeFormatter;
 
@@ -29,9 +30,12 @@ public class ESolatModule {
     }
 
     @Provides
-    ESolatService provideESolatService(ESolatApi eSolatApi,
-                                       PrayerTimeDao prayerTimeDao,
-                                       TimeFormatter timeFormatter) {
-        return new ESolatService(eSolatApi, prayerTimeDao, timeFormatter);
+    TaskManager provideTaskManager(PrayerTimeDao prayerTimeDao, TimeFormatter timeFormatter) {
+        return new TaskManager(prayerTimeDao, timeFormatter);
+    }
+
+    @Provides
+    ESolatManager provideESolatManager(ESolatApi eSolatApi, TaskManager taskManager) {
+        return new ESolatManager(eSolatApi, taskManager);
     }
 }
