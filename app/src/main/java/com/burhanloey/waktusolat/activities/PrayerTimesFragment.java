@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.burhanloey.waktusolat.R;
 import com.burhanloey.waktusolat.services.esolat.ESolat;
-import com.burhanloey.waktusolat.services.esolat.ESolatDownloader;
+import com.burhanloey.waktusolat.services.esolat.ESolatManager;
 import com.burhanloey.waktusolat.services.esolat.model.PrayerTime;
 import com.burhanloey.waktusolat.services.esolat.tasks.LoadCallback;
 import com.burhanloey.waktusolat.services.timeformat.TimeFormatter;
@@ -25,7 +25,7 @@ import dagger.android.support.DaggerFragment;
 
 public class PrayerTimesFragment extends DaggerFragment {
     @Inject
-    ESolatDownloader eSolatDownloader;
+    ESolatManager eSolatManager;
 
     @Inject
     TimeFormatter timeFormatter;
@@ -64,7 +64,7 @@ public class PrayerTimesFragment extends DaggerFragment {
     }
 
     public void loadPrayerTime(final String districtCode) {
-        eSolatDownloader.load(getActivity(), districtCode, new LoadCallback() {
+        eSolatManager.load(districtCode, new LoadCallback() {
             @Override
             public void onResponse(PrayerTime prayerTime) {
                 update(prayerTime);
