@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.burhanloey.waktusolat.R;
 import com.burhanloey.waktusolat.services.esolat.ESolat;
-import com.burhanloey.waktusolat.services.esolat.ESolatService;
+import com.burhanloey.waktusolat.services.esolat.ESolatDownloader;
 import com.burhanloey.waktusolat.services.esolat.tasks.FetchCallback;
 import com.burhanloey.waktusolat.services.state.StateManager;
 
@@ -22,7 +22,7 @@ import dagger.android.support.DaggerAppCompatActivity;
 
 public class MainActivity extends DaggerAppCompatActivity {
     @Inject
-    ESolatService eSolatService;
+    ESolatDownloader eSolatDownloader;
 
     @Inject
     StateManager stateManager;
@@ -59,7 +59,7 @@ public class MainActivity extends DaggerAppCompatActivity {
         int position = districtCodeSpinner.getSelectedItemPosition();
         final String districtCode = ESolat.getDistrictCode(position);
 
-        eSolatService.fetch(this, districtCode, new FetchCallback() {
+        eSolatDownloader.fetch(this, districtCode, new FetchCallback() {
             @Override
             public void onSuccess() {
                 fragment.loadPrayerTime(districtCode);

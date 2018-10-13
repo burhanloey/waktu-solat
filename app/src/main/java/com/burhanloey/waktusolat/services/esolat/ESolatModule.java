@@ -29,9 +29,9 @@ public class ESolatModule {
     }
 
     @Provides
-    ESolatService provideESolatService(ESolatApi eSolatApi,
-                                       PrayerTimeDao prayerTimeDao,
-                                       TimeFormatter timeFormatter) {
-        return new ESolatService(eSolatApi, prayerTimeDao, timeFormatter);
+    ESolatDownloader provideESolatDownloader(ESolatApi eSolatApi,
+                                             PrayerTimeDao prayerTimeDao,
+                                             TimeFormatter timeFormatter) {
+        return new ESolatDownloader(eSolatApi, prayerTimeDao, timeFormatter);
     }
 }

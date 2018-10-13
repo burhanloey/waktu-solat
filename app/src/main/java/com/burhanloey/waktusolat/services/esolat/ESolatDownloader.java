@@ -15,14 +15,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ESolatService {
+public class ESolatDownloader {
     private final ESolatApi eSolatApi;
     private final PrayerTimeDao prayerTimeDao;
     private final TimeFormatter timeFormatter;
 
-    public ESolatService(ESolatApi eSolatApi,
-                         PrayerTimeDao prayerTimeDao,
-                         TimeFormatter timeFormatter) {
+    public ESolatDownloader(ESolatApi eSolatApi,
+                            PrayerTimeDao prayerTimeDao,
+                            TimeFormatter timeFormatter) {
         this.eSolatApi = eSolatApi;
         this.prayerTimeDao = prayerTimeDao;
         this.timeFormatter = timeFormatter;
