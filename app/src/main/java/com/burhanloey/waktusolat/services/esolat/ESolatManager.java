@@ -16,8 +16,7 @@ public class ESolatManager {
     private final ESolatApi eSolatApi;
     private final TaskManager taskManager;
 
-    public ESolatManager(ESolatApi eSolatApi,
-                         TaskManager taskManager) {
+    public ESolatManager(ESolatApi eSolatApi, TaskManager taskManager) {
         this.eSolatApi = eSolatApi;
         this.taskManager = taskManager;
     }
@@ -29,8 +28,7 @@ public class ESolatManager {
      * @param districtCode District code for which data to fetch for
      * @param callback FetchCallback for API failure and on success
      */
-    public void fetch(final String districtCode,
-                      final FetchCallback callback) {
+    public void fetch(final String districtCode, final FetchCallback callback) {
         eSolatApi.yearlyPrayerTimes(districtCode)
                 .enqueue(new Callback<YearlyPrayerTimes>() {
                     @Override
