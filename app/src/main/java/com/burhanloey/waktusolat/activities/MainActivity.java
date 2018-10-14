@@ -1,6 +1,9 @@
 package com.burhanloey.waktusolat.activities;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Spinner;
@@ -42,6 +45,20 @@ public class MainActivity extends DaggerAppCompatActivity {
         }
     }
 
+    private void testAlarm() {
+        Intent intent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+
+        long currentTimeMillis = System.currentTimeMillis();
+        long triggerAtMillis = currentTimeMillis + 5000;
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager != null) {
+            alarmManager.set(AlarmManager.RTC_WAKEUP, triggerAtMillis, pendingIntent);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,6 +69,8 @@ public class MainActivity extends DaggerAppCompatActivity {
         int position = stateManager.getPosition();
         districtCodeSpinner.setSelection(position);
         fragment.loadPrayerTime(position);
+
+        testAlarm();
     }
 
     @OnClick(R.id.fetch_button)
