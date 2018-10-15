@@ -1,10 +1,10 @@
 package com.burhanloey.waktusolat;
 
-import com.burhanloey.waktusolat.services.alarm.PrayerAlarmModule;
-import com.burhanloey.waktusolat.services.esolat.ESolatModule;
-import com.burhanloey.waktusolat.services.state.StateModule;
-import com.burhanloey.waktusolat.services.storage.StorageModule;
-import com.burhanloey.waktusolat.services.timeformat.TimeFormatModule;
+import com.burhanloey.waktusolat.modules.alarm.PrayerAlarmModule;
+import com.burhanloey.waktusolat.modules.esolat.ESolatModule;
+import com.burhanloey.waktusolat.modules.state.StateModule;
+import com.burhanloey.waktusolat.modules.storage.StorageModule;
+import com.burhanloey.waktusolat.modules.timeformat.TimeFormatModule;
 
 import dagger.Component;
 import dagger.android.AndroidInjector;

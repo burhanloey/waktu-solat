@@ -1,10 +1,10 @@
 package com.burhanloey.waktusolat;
 
-import com.burhanloey.waktusolat.activities.AlarmReceiver;
-import com.burhanloey.waktusolat.activities.BootReceiver;
-import com.burhanloey.waktusolat.activities.MainActivity;
-import com.burhanloey.waktusolat.activities.NextAlarmService;
-import com.burhanloey.waktusolat.activities.PrayerTimesFragment;
+import com.burhanloey.waktusolat.components.AlarmReceiver;
+import com.burhanloey.waktusolat.components.BootReceiver;
+import com.burhanloey.waktusolat.components.MainActivity;
+import com.burhanloey.waktusolat.components.NextAlarmService;
+import com.burhanloey.waktusolat.components.PrayerTimesFragment;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;

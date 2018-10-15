@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".activities.MainActivity">
+        <activity android:name=".components.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -24,16 +24,16 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".activities.AlarmReceiver" />
+        <receiver android:name=".components.AlarmReceiver" />
 
-        <receiver android:name=".activities.BootReceiver">
+        <receiver android:name=".components.BootReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
         <service
-            android:name=".activities.NextAlarmService"
+            android:name=".components.NextAlarmService"
             android:permission="android.permission.BIND_JOB_SERVICE"/>
     </application>
 
