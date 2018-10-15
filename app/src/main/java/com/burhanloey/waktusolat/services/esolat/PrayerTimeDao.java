@@ -14,12 +14,12 @@ public interface PrayerTimeDao {
     /**
      * Find prayer time given the date and district code.
      *
-     * @param date Date. Refer TimeFormatModule for reference on the format.
      * @param districtCode District code. Refer ESolat for reference.
-     * @return Prayer time
+     * @param dates A list of Date. Refer TimeFormatModule for reference on the format.
+     * @return A list of Prayer time
      */
-    @Query("SELECT * FROM prayertime WHERE date = :date AND districtCode = :districtCode")
-    PrayerTime find(String date, String districtCode);
+    @Query("SELECT * FROM prayertime WHERE districtCode = :districtCode AND date IN (:dates)")
+    List<PrayerTime> find(String districtCode, List<String> dates);
 
     /**
      * Insert a list of prayer times into the database. If the data already exists, they will be
