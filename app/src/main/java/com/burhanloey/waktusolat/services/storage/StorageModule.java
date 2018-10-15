@@ -8,11 +8,16 @@ import dagger.Provides;
 
 @Module
 public class StorageModule {
+    private static AppDatabase appDatabase;
+
     @Provides
     AppDatabase provideAppDatabase(Context context) {
-        return Room
-                .databaseBuilder(context, AppDatabase.class, "waktusolat")
-                .build();
+        if (appDatabase == null) {
+            appDatabase =  Room
+                    .databaseBuilder(context, AppDatabase.class, "waktusolat")
+                    .build();
+        }
+        return appDatabase;
     }
 
     @Provides

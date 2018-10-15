@@ -3,10 +3,13 @@ package com.burhanloey.waktusolat.activities;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.burhanloey.waktusolat.R;
+import com.burhanloey.waktusolat.services.alarm.PrayerAlarmManager;
 import com.burhanloey.waktusolat.services.esolat.ESolat;
 import com.burhanloey.waktusolat.services.esolat.ESolatManager;
 import com.burhanloey.waktusolat.services.esolat.tasks.FetchCallback;
@@ -16,6 +19,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import dagger.android.support.DaggerAppCompatActivity;
@@ -25,6 +29,9 @@ public class MainActivity extends DaggerAppCompatActivity {
     ESolatManager eSolatManager;
 
     @Inject
+    PrayerAlarmManager prayerAlarmManager;
+
+    @Inject
     StateManager stateManager;
 
     @Inject
@@ -32,6 +39,9 @@ public class MainActivity extends DaggerAppCompatActivity {
 
     @BindView(R.id.spinner)
     Spinner districtCodeSpinner;
+
+    @BindView(R.id.notifications_switch)
+    Switch notificationsSwitch;
 
     PrayerTimesFragment fragment;
 
@@ -52,6 +62,9 @@ public class MainActivity extends DaggerAppCompatActivity {
         int position = stateManager.getPosition();
         districtCodeSpinner.setSelection(position);
         fragment.loadPrayerTime(position);
+
+        boolean isChecked = stateManager.getNotificationsEnabled();
+        notificationsSwitch.setChecked(isChecked);
     }
 
     @OnClick(R.id.fetch_button)
@@ -76,5 +89,16 @@ public class MainActivity extends DaggerAppCompatActivity {
     public void load(int position) {
         stateManager.setPosition(position);
         fragment.loadPrayerTime(position);
+    }
+
+    @OnCheckedChanged(R.id.notifications_switch)
+    public void notify(CompoundButton button, boolean isChecked) {
+        stateManager.setNotificationsEnabled(isChecked);
+
+        if (isChecked) {
+            prayerAlarmManager.setNextAlarm();
+        } else {
+            prayerAlarmManager.cancelAlarm();
+        }
     }
 }

@@ -7,6 +7,7 @@
     <string name="asar">Asar</string>
     <string name="maghrib">Maghrib</string>
     <string name="isha">Isha\'</string>
+    <string name="notifications">Show notifications</string>
     <string-array name="district">
         <item>JHR01 - Pulau Aur dan Pulau Pemanggil</item>
         <item>JHR02 - Johor Bharu, Kota Tinggi, Mersing</item>

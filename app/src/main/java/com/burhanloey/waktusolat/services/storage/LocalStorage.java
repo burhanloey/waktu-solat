@@ -30,4 +30,20 @@ public class LocalStorage {
         editor.putInt(key, value);
         editor.apply();
     }
+
+    public boolean getBoolean(String key, boolean defValue) {
+        SharedPreferences preferences = context
+                .getSharedPreferences(STORAGE_NAME, Context.MODE_PRIVATE);
+
+        return preferences.getBoolean(key, defValue);
+    }
+
+    public void putBoolean(String key, boolean value) {
+        SharedPreferences.Editor editor = context
+                .getSharedPreferences(STORAGE_NAME, Context.MODE_PRIVATE)
+                .edit();
+
+        editor.putBoolean(key, value);
+        editor.apply();
+    }
 }
