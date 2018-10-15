@@ -52,11 +52,9 @@ public class PrayerAlarmManager {
      * Set up alarm in AlarmManager.
      */
     private void set(List<PrayerTime> prayerTimes) {
-        String districtCode = prayerTimes.get(0).getDistrictCode();
         AlarmInfo alarmInfo = nextAlarm(prayerTimes);
 
         Intent intent = new Intent(context, AlarmReceiver.class);
-        intent.putExtra("districtCode", districtCode);
         intent.putExtra("title", alarmInfo.getTitle());
         intent.putExtra("text", alarmInfo.getText());
 
