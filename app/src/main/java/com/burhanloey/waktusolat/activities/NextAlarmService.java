@@ -1,27 +1,31 @@
 package com.burhanloey.waktusolat.activities;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.v4.app.JobIntentService;
 
 import com.burhanloey.waktusolat.services.alarm.PrayerAlarmManager;
 import com.burhanloey.waktusolat.services.state.StateManager;
 
 import javax.inject.Inject;
 
-import dagger.android.DaggerIntentService;
+import dagger.android.AndroidInjection;
 
-public class NextAlarmService extends DaggerIntentService {
+public class NextAlarmService extends JobIntentService {
     @Inject
     StateManager stateManager;
 
     @Inject
     PrayerAlarmManager prayerAlarmManager;
 
-    public NextAlarmService() {
-        super("com.burhanloey.waktusolat.activities.NextAlarmService");
+    @Override
+    public void onCreate() {
+        AndroidInjection.inject(this);
+        super.onCreate();
     }
 
     @Override
-    protected void onHandleIntent(Intent intent) {
+    protected void onHandleWork(@NonNull Intent intent) {
         boolean isNotificationsEnabled = stateManager.getNotificationsEnabled();
 
         if (isNotificationsEnabled) {
