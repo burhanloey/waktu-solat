@@ -1,4 +1,4 @@
-package com.burhanloey.waktusolat.services.timeformat;
+package com.burhanloey.waktusolat.services.alarm;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

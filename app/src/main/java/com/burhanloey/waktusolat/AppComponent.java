@@ -1,5 +1,6 @@
 package com.burhanloey.waktusolat;
 
+import com.burhanloey.waktusolat.services.alarm.PrayerAlarmModule;
 import com.burhanloey.waktusolat.services.esolat.ESolatModule;
 import com.burhanloey.waktusolat.services.state.StateModule;
 import com.burhanloey.waktusolat.services.storage.StorageModule;
@@ -16,7 +17,8 @@ import dagger.android.support.AndroidSupportInjectionModule;
         StorageModule.class,
         ESolatModule.class,
         TimeFormatModule.class,
-        StateModule.class
+        StateModule.class,
+        PrayerAlarmModule.class
 })
 public interface AppComponent extends AndroidInjector<App> {
     @Component.Builder

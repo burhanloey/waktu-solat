@@ -8,6 +8,6 @@ import java.util.List;
  * Callbacks during prayer time data loading from database. The callbacks will run on UI thread.
  */
 public interface LoadCallback {
-    void onResponse(List<PrayerTime> prayerTime);
+    void onResponse(List<PrayerTime> prayerTimes);
     void onMissingData();
 }

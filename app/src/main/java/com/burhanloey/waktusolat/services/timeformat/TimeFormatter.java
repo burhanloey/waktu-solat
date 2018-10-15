@@ -1,5 +1,6 @@
 package com.burhanloey.waktusolat.services.timeformat;
 
+import com.burhanloey.waktusolat.services.alarm.AlarmInfo;
 import com.burhanloey.waktusolat.services.esolat.model.PrayerTime;
 
 import java.text.DateFormat;
@@ -73,7 +74,7 @@ public class TimeFormatter {
      * @param prayerTimes A list of prayer times
      * @return A list of AlarmInfo
      */
-    public List<AlarmInfo> calculateAlarmInfos(PrayerTime... prayerTimes) {
+    public List<AlarmInfo> calculateAlarmInfos(List<PrayerTime> prayerTimes) {
         List<AlarmInfo> alarmInfos = new ArrayList<>(10);
 
         for (PrayerTime prayerTime : prayerTimes) {

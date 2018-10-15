@@ -30,11 +30,11 @@ public class AlarmReceiver extends DaggerBroadcastReceiver {
         }
     }
 
-    private void callForPrayer(Context context) {
+    private void callForPrayer(Context context, String title, String text) {
         Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle("Zuhur")
-                .setContentText("1.07 PM")
+                .setContentTitle(title)
+                .setContentText(text)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .build();
 
@@ -48,6 +48,10 @@ public class AlarmReceiver extends DaggerBroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
 
-        callForPrayer(context);
+        String title = intent.getStringExtra("title");
+        String text = intent.getStringExtra("text");
+        callForPrayer(context, title, text);
+
+        String districtCode = intent.getStringExtra("districtCode");
     }
 }
