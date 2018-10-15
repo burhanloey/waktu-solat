@@ -70,7 +70,9 @@ public class PrayerAlarmManager {
     }
 
 
-
+    /**
+     * Set next alarm according to current selection of district.
+     */
     public void setNextAlarm() {
         int position = stateManager.getPosition();
         String districtCode = ESolat.getDistrictCode(position);
@@ -89,6 +91,9 @@ public class PrayerAlarmManager {
         });
     }
 
+    /**
+     * Cancel any prayer alarm registered to phone by this app.
+     */
     public void cancelAlarm() {
         Intent intent = new Intent(context, AlarmReceiver.class);
         PendingIntent pendingIntent = PendingIntent.getBroadcast(

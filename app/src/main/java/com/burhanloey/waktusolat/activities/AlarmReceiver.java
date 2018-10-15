@@ -16,6 +16,9 @@ import dagger.android.DaggerBroadcastReceiver;
 public class AlarmReceiver extends DaggerBroadcastReceiver {
     private static final String CHANNEL_ID = "CALL_FOR_PRAYER";
 
+    /**
+     * Notification channel is required for Android Oreo and above.
+     */
     private void createNotificationChannel(Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             String channelName = "Waktu Solat";
@@ -30,6 +33,9 @@ public class AlarmReceiver extends DaggerBroadcastReceiver {
         }
     }
 
+    /**
+     * Creating notification for prayer.
+     */
     private void callForPrayer(Context context, String title, String text) {
         Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher)

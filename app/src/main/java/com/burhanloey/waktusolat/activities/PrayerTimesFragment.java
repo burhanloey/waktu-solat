@@ -63,6 +63,11 @@ public class PrayerTimesFragment extends DaggerFragment {
         }
     }
 
+    /**
+     * Load todays' prayer time.
+     *
+     * @param districtCode District code
+     */
     public void loadPrayerTime(final String districtCode) {
         eSolatManager.load(districtCode, new LoadCallback() {
             @Override
@@ -77,6 +82,11 @@ public class PrayerTimesFragment extends DaggerFragment {
         });
     }
 
+    /**
+     * Same with loadPrayerTime(String) but takes spinner position.
+     *
+     * @param position Spinner position
+     */
     public void loadPrayerTime(int position) {
         String districtCode = ESolat.getDistrictCode(position);
         loadPrayerTime(districtCode);
