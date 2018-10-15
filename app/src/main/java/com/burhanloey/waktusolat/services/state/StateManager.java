@@ -29,4 +29,22 @@ public class StateManager {
     public void setPosition(int position) {
         localStorage.putInt("position", position);
     }
+
+    /**
+     * Get previous state of notifications switch. Default to false.
+     *
+     * @return Notifications switch state
+     */
+    public boolean getNotificationsEnabled() {
+        return localStorage.getBoolean("notifications_enabled", false);
+    }
+
+    /**
+     * Save current state of notifications switch.
+     *
+     * @param value Boolean value
+     */
+    public void setNotificationsEnabled(boolean value) {
+        localStorage.putBoolean("notifications_enabled", value);
+    }
 }

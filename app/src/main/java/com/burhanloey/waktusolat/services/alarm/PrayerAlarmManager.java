@@ -7,22 +7,27 @@ import android.content.Intent;
 import android.widget.Toast;
 
 import com.burhanloey.waktusolat.activities.AlarmReceiver;
+import com.burhanloey.waktusolat.services.esolat.ESolat;
 import com.burhanloey.waktusolat.services.esolat.ESolatManager;
 import com.burhanloey.waktusolat.services.esolat.model.PrayerTime;
 import com.burhanloey.waktusolat.services.esolat.tasks.LoadCallback;
+import com.burhanloey.waktusolat.services.state.StateManager;
 import com.burhanloey.waktusolat.services.timeformat.TimeFormatter;
 
 import java.util.List;
 
 public class PrayerAlarmManager {
     private final ESolatManager eSolatManager;
+    private final StateManager stateManager;
     private final TimeFormatter timeFormatter;
     private final Context context;
 
     public PrayerAlarmManager(ESolatManager eSolatManager,
+                              StateManager stateManager,
                               TimeFormatter timeFormatter,
                               Context context) {
         this.eSolatManager = eSolatManager;
+        this.stateManager = stateManager;
         this.timeFormatter = timeFormatter;
         this.context = context;
     }
@@ -66,7 +71,10 @@ public class PrayerAlarmManager {
 
 
 
-    public void setAlarm(String districtCode) {
+    public void setNextAlarm() {
+        int position = stateManager.getPosition();
+        String districtCode = ESolat.getDistrictCode(position);
+
         eSolatManager.load(districtCode, new LoadCallback() {
             @Override
             public void onResponse(List<PrayerTime> prayerTimes) {
@@ -79,5 +87,16 @@ public class PrayerAlarmManager {
                         Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    public void cancelAlarm() {
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                context, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+
+        AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        if (alarmManager != null) {
+            alarmManager.cancel(pendingIntent);
+        }
     }
 }

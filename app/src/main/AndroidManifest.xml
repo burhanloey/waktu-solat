@@ -20,6 +20,7 @@
             </intent-filter>
         </activity>
         <receiver android:name=".activities.AlarmReceiver" />
+        <service android:name=".activities.NextAlarmService" />
     </application>
 
 </manifest>

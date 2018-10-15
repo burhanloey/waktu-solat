@@ -52,6 +52,7 @@ public class AlarmReceiver extends DaggerBroadcastReceiver {
         String text = intent.getStringExtra("text");
         callForPrayer(context, title, text);
 
-        String districtCode = intent.getStringExtra("districtCode");
+        Intent nextAlarmIntent = new Intent(context, NextAlarmService.class);
+        context.startService(nextAlarmIntent);
     }
 }
