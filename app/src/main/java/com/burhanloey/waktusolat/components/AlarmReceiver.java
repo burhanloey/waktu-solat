@@ -60,7 +60,8 @@ public class AlarmReceiver extends DaggerBroadcastReceiver {
 
         if (powerManager != null && !powerManager.isScreenOn()) {
             PowerManager.WakeLock wakeLock = powerManager.newWakeLock(
-                    PowerManager.PARTIAL_WAKE_LOCK, "waktu-solat::Call_for_prayer");
+                    PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.ON_AFTER_RELEASE,
+                    "waktu-solat::Call_for_prayer");
             wakeLock.acquire(1);  // wake for only 1 ms to not drain battery
         }
     }
