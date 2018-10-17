@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Waktu Solat</string>
-    <string name="fetch">Fetch Data</string>
+    <string name="fetch">Fetch</string>
+    <string name="fetching">Fetching...</string>
     <string name="subuh">Subuh</string>
     <string name="not_available">Not available</string>
     <string name="zuhur">Zuhur</string>

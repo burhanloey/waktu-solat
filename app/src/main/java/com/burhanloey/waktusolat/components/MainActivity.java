@@ -3,7 +3,9 @@ package com.burhanloey.waktusolat.components;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -40,6 +42,12 @@ public class MainActivity extends DaggerAppCompatActivity {
     @BindView(R.id.spinner)
     Spinner districtCodeSpinner;
 
+    @BindView(R.id.fetch_button)
+    Button fetchButton;
+
+    @BindView(R.id.progress_bar)
+    ProgressBar progressBar;
+
     @BindView(R.id.notifications_switch)
     Switch notificationsSwitch;
 
@@ -67,19 +75,43 @@ public class MainActivity extends DaggerAppCompatActivity {
         notificationsSwitch.setChecked(isChecked);
     }
 
+    /**
+     * Show visual cues that the app is loading.
+     */
+    private void showLoading() {
+        fetchButton.setText(R.string.fetching);
+        fetchButton.setEnabled(false);
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    /**
+     * Hide loading visual cues.
+     */
+    private void hideLoading() {
+        fetchButton.setText(R.string.fetch);
+        fetchButton.setEnabled(true);
+        progressBar.setVisibility(View.GONE);
+    }
+
     @OnClick(R.id.fetch_button)
     public void fetch(View view) {
         int position = districtCodeSpinner.getSelectedItemPosition();
         final String districtCode = ESolat.getDistrictCode(position);
 
+        showLoading();
+
         eSolatManager.fetch(districtCode, new FetchCallback() {
             @Override
             public void onCompleted() {
+                hideLoading();
+
                 fragment.loadPrayerTime(districtCode);
             }
 
             @Override
             public void onFailure(String message) {
+                hideLoading();
+
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
             }
         });
