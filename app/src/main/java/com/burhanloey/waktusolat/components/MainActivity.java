@@ -3,6 +3,7 @@ package com.burhanloey.waktusolat.components;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
@@ -39,8 +40,11 @@ public class MainActivity extends DaggerAppCompatActivity {
     @Inject
     Context context;
 
-    @BindView(R.id.spinner)
-    Spinner districtCodeSpinner;
+    @BindView(R.id.state_spinner)
+    Spinner stateSpinner;
+
+    @BindView(R.id.district_spinner)
+    Spinner districtSpinner;
 
     @BindView(R.id.fetch_button)
     Button fetchButton;
@@ -60,19 +64,26 @@ public class MainActivity extends DaggerAppCompatActivity {
         }
     }
 
+    private void loadPreviousState() {
+        int statePosition = stateManager.getStatePosition();
+        stateSpinner.setSelection(statePosition);
+
+        int districtPosition = stateManager.getDistrictPosition();
+        districtSpinner.setSelection(districtPosition);
+
+        fragment.loadPrayerTime(statePosition, districtPosition);
+
+        boolean isChecked = stateManager.getNotificationsEnabled();
+        notificationsSwitch.setChecked(isChecked);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         bindFragment();
-
-        int position = stateManager.getPosition();
-        districtCodeSpinner.setSelection(position);
-        fragment.loadPrayerTime(position);
-
-        boolean isChecked = stateManager.getNotificationsEnabled();
-        notificationsSwitch.setChecked(isChecked);
+        loadPreviousState();
     }
 
     /**
@@ -95,8 +106,9 @@ public class MainActivity extends DaggerAppCompatActivity {
 
     @OnClick(R.id.fetch_button)
     public void fetch(View view) {
-        int position = districtCodeSpinner.getSelectedItemPosition();
-        final String districtCode = ESolat.getDistrictCode(position);
+        int statePosition = stateSpinner.getSelectedItemPosition();
+        int districtPosition = districtSpinner.getSelectedItemPosition();
+        final String districtCode = ESolat.getDistrictCode(statePosition, districtPosition);
 
         showLoading();
 
@@ -117,15 +129,30 @@ public class MainActivity extends DaggerAppCompatActivity {
         });
     }
 
-    @OnItemSelected(R.id.spinner)
-    public void load(int position) {
-        stateManager.setPosition(position);
-        fragment.loadPrayerTime(position);
+    @OnItemSelected(R.id.state_spinner)
+    public void selectState(int statePosition) {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                ESolat.getDistrictArray(statePosition), android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        districtSpinner.setAdapter(adapter);
+
+        stateManager.saveStatePosition(statePosition);
+
+        int districtPosition = districtSpinner.getSelectedItemPosition();
+        fragment.loadPrayerTime(statePosition, districtPosition);
+    }
+
+    @OnItemSelected(R.id.district_spinner)
+    public void selectDistrict(int districtPosition) {
+        stateManager.saveDistrictPosition(districtPosition);
+
+        int statePosition = stateSpinner.getSelectedItemPosition();
+        fragment.loadPrayerTime(statePosition, districtPosition);
     }
 
     @OnCheckedChanged(R.id.notifications_switch)
     public void notify(CompoundButton button, boolean isChecked) {
-        stateManager.setNotificationsEnabled(isChecked);
+        stateManager.saveNotificationsEnabled(isChecked);
 
         if (isChecked) {
             prayerAlarmManager.setNextAlarm();

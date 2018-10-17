@@ -13,21 +13,39 @@ public class StateManager {
     }
 
     /**
-     * Get previous position of the spinner. Default to 0 (first item).
+     * Get previous position of the state spinner. Default to 0 (first item).
      *
-     * @return Spinner position
+     * @return State spinner position
      */
-    public int getPosition() {
-        return localStorage.getInt("position", 0);
+    public int getStatePosition() {
+        return localStorage.getInt("state_position", 0);
     }
 
     /**
-     * Save current position of the spinner.
+     * Save current position of the state spinner.
      *
-     * @param position Spinner position
+     * @param position State spinner position
      */
-    public void setPosition(int position) {
-        localStorage.putInt("position", position);
+    public void saveStatePosition(int position) {
+        localStorage.putInt("state_position", position);
+    }
+
+    /**
+     * Get previous position of the district spinner. Default to 0 (first item).
+     *
+     * @return District spinner position
+     */
+    public int getDistrictPosition() {
+        return localStorage.getInt("district_position", 0);
+    }
+
+    /**
+     * Save current position of the district spinner.
+     *
+     * @param position District spinner position
+     */
+    public void saveDistrictPosition(int position) {
+        localStorage.putInt("district_position", position);
     }
 
     /**
@@ -44,7 +62,7 @@ public class StateManager {
      *
      * @param value Boolean value
      */
-    public void setNotificationsEnabled(boolean value) {
+    public void saveNotificationsEnabled(boolean value) {
         localStorage.putBoolean("notifications_enabled", value);
     }
 }
