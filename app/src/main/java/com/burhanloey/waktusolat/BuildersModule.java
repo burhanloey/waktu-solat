@@ -1,7 +1,6 @@
 package com.burhanloey.waktusolat;
 
 import com.burhanloey.waktusolat.components.AlarmReceiver;
-import com.burhanloey.waktusolat.components.BootReceiver;
 import com.burhanloey.waktusolat.components.MainActivity;
 import com.burhanloey.waktusolat.components.NextAlarmService;
 import com.burhanloey.waktusolat.components.PrayerTimesFragment;
@@ -19,9 +18,6 @@ public abstract class BuildersModule {
 
     @ContributesAndroidInjector
     abstract AlarmReceiver bindAlarmReceiver();
-
-    @ContributesAndroidInjector
-    abstract BootReceiver bindBootReceiver();
 
     @ContributesAndroidInjector
     abstract NextAlarmService bindNextAlarmService();
