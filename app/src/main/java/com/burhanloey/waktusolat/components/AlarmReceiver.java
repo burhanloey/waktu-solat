@@ -6,6 +6,7 @@ import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.PowerManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationManagerCompat;
 
@@ -50,6 +51,21 @@ public class AlarmReceiver extends DaggerBroadcastReceiver {
         manager.notify(0, notification);
     }
 
+    /**
+     * Wake up the phone (so the screen light will turned on) for a short time to grab user
+     * attention.
+     */
+    private void wake(Context context) {
+        PowerManager powerManager = (PowerManager) context.getSystemService(Context.POWER_SERVICE);
+
+        if (powerManager != null && !powerManager.isScreenOn()) {
+            PowerManager.WakeLock wakeLock = powerManager.newWakeLock(
+                    PowerManager.FULL_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP |
+                            PowerManager.ON_AFTER_RELEASE, "waktu-solat::Call_for_prayer");
+            wakeLock.acquire(1);  // wake for only 1 ms to not drain battery
+        }
+    }
+
     @Override
     public void onReceive(Context context, Intent intent) {
         super.onReceive(context, intent);
@@ -57,6 +73,7 @@ public class AlarmReceiver extends DaggerBroadcastReceiver {
         String title = intent.getStringExtra("title");
         String text = intent.getStringExtra("text");
         callForPrayer(context, title, text);
+        wake(context);
 
         Intent nextAlarmIntent = new Intent(context, NextAlarmService.class);
         NextAlarmService.enqueueWork(context, nextAlarmIntent);
