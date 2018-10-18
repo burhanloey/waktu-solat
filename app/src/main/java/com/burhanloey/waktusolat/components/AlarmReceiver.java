@@ -75,7 +75,6 @@ public class AlarmReceiver extends DaggerBroadcastReceiver {
         callForPrayer(context, title, text);
         wake(context);
 
-        Intent nextAlarmIntent = new Intent(context, NextAlarmService.class);
-        NextAlarmService.enqueueWork(context, nextAlarmIntent);
+        NextAlarmService.enqueueWork(context);
     }
 }

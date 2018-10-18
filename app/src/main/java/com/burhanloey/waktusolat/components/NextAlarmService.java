@@ -30,9 +30,9 @@ public class NextAlarmService extends JobIntentService {
      * Enqueue this Service/JobSchedule.
      *
      * @param context Application context
-     * @param intent Intent to run this service/job
      */
-    public static void enqueueWork(Context context, Intent intent) {
+    public static void enqueueWork(Context context) {
+        Intent intent = new Intent(context, NextAlarmService.class);
         enqueueWork(context, NextAlarmService.class, JOB_ID, intent);
     }
 
