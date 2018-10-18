@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Waktu Solat</string>
-    <string name="fetch">Fetch Data</string>
+    <string name="download">Download</string>
+    <string name="downloading">Downloading…</string>
     <string name="subuh">Subuh</string>
     <string name="not_available">Not available</string>
     <string name="zuhur">Zuhur</string>
@@ -8,64 +9,108 @@
     <string name="maghrib">Maghrib</string>
     <string name="isha">Isha\'</string>
     <string name="notifications">Show notifications</string>
-    <string-array name="district">
-        <item>JHR01 - Pulau Aur dan Pulau Pemanggil</item>
-        <item>JHR02 - Johor Bharu, Kota Tinggi, Mersing</item>
-        <item>JHR03 - Kluang, Pontian</item>
-        <item>JHR04 - Batu Pahat, Muar, Segamat, Gemas Johor</item>
-        <item>KDH01 - Kota Setar, Kubang Pasu, Pokok Sena (Daerah Kecil)</item>
-        <item>KDH02 - Kuala Muda, Yan, Pendang</item>
-        <item>KDH03 - Padang Terap, Sik</item>
-        <item>KDH04 - Baling</item>
-        <item>KDH05 - Bandar Baharu, Kulim</item>
-        <item>KDH06 - Langkawi</item>
-        <item>KDH07 - Gunung Jerai</item>
-        <item>KTN01 - Bachok, Kota Bharu, Machang, Pasir Mas, Pasir Puteh, Tanah Merah, Tumpat, Kuala Krai, Mukim Chiku</item>
-        <item>KTN03 - Gua Musang (Daerah Galas Dan Bertam), Jeli</item>
-        <item>MLK01 - SELURUH NEGERI MELAKA</item>
-        <item>NGS01 - Tampin, Jempol</item>
-        <item>NGS02 - Jelebu, Kuala Pilah, Port Dickson, Rembau, Seremban</item>
-        <item>PHG01 - Pulau Tioman</item>
-        <item>PHG02 - Kuantan, Pekan, Rompin, Muadzam Shah</item>
-        <item>PHG03 - Jerantut, Temerloh, Maran, Bera, Chenor, Jengka</item>
-        <item>PHG04 - Bentong, Lipis, Raub</item>
-        <item>PHG05 - Genting Sempah, Janda Baik, Bukit Tinggi</item>
-        <item>PHG06 - Cameron Highlands, Genting Higlands, Bukit Fraser</item>
-        <item>PLS01 - Kangar, Padang Besar, Arau</item>
-        <item>PNG01 - Seluruh Negeri Pulau Pinang</item>
-        <item>PRK01 - Tapah, Slim River, Tanjung Malim</item>
-        <item>PRK02 - Kuala Kangsar, Sg. Siput (Daerah Kecil), Ipoh, Batu Gajah, Kampar</item>
-        <item>PRK03 - Lenggong, Pengkalan Hulu, Grik</item>
-        <item>PRK04 - Temengor, Belum</item>
-        <item>PRK05 - Kg Gajah, Teluk Intan, Bagan Datuk, Seri Iskandar, Beruas, Parit, Lumut, Sitiawan, Pulau Pangkor</item>
-        <item>PRK06 - Selama, Taiping, Bagan Serai, Parit Buntar</item>
-        <item>PRK07 - Bukit Larut</item>
-        <item>SBH01 - Bahagian Sandakan (Timur), Bukit Garam, Semawang, Temanggong, Tambisan, Bandar Sandakan</item>
-        <item>SBH02 - Beluran, Telupid, Pinangah, Terusan, Kuamut, Bahagian Sandakan (Barat)</item>
-        <item>SBH03 - Lahad Datu, Silabukan, Kunak, Sahabat, Semporna, Tungku, Bahagian Tawau  (Timur)</item>
-        <item>SBH04 - Bandar Tawau, Balong, Merotai, Kalabakan, Bahagian Tawau (Barat)</item>
-        <item>SBH05 - Kudat, Kota Marudu, Pitas, Pulau Banggi, Bahagian Kudat</item>
-        <item>SBH06 - Gunung Kinabalu</item>
-        <item>SBH07 - Kota Kinabalu, Ranau, Kota Belud, Tuaran, Penampang, Papar, Putatan, Bahagian Pantai Barat</item>
-        <item>SBH08 - Pensiangan, Keningau, Tambunan, Nabawan, Bahagian Pendalaman (Atas)</item>
-        <item>SBH09 - Beaufort, Kuala Penyu, Sipitang, Tenom, Long Pa Sia, Membakut, Weston, Bahagian Pendalaman (Bawah)</item>
-        <item>SGR01 - Gombak, Petaling, Sepang, Hulu Langat, Hulu Selangor, Rawang, S.Alam</item>
-        <item>SGR02 - Kuala Selangor, Sabak Bernam</item>
-        <item>SGR03 - Klang, Kuala Langat</item>
-        <item>SWK01 - Limbang, Lawas, Sundar, Trusan</item>
-        <item>SWK02 - Miri, Niah, Bekenu, Sibuti, Marudi</item>
-        <item>SWK03 - Pandan, Belaga, Suai, Tatau, Sebauh, Bintulu</item>
-        <item>SWK04 - Sibu, Mukah, Dalat, Song, Igan, Oya, Balingian, Kanowit, Kapit</item>
-        <item>SWK05 - Sarikei, Matu, Julau, Rajang, Daro, Bintangor, Belawai</item>
-        <item>SWK06 - Lubok Antu, Sri Aman, Roban, Debak, Kabong, Lingga, Engkelili, Betong, Spaoh, Pusa, Saratok</item>
-        <item>SWK07 - Serian, Simunjan, Samarahan, Sebuyau, Meludam</item>
-        <item>SWK08 - Kuching, Bau, Lundu, Sematan</item>
-        <item>SWK09 - Zon Khas (Kampung Patarikan)</item>
-        <item>TRG01 - Kuala Terengganu, Marang, Kuala Nerus</item>
-        <item>TRG02 - Besut, Setiu</item>
-        <item>TRG03 - Hulu Terengganu</item>
-        <item>TRG04 - Dungun, Kemaman</item>
-        <item>WLY01 - Kuala Lumpur, Putrajaya</item>
-        <item>WLY02 - Labuan</item>
+    <string name="negeri">Negeri</string>
+    <string name="daerah">Daerah</string>
+    <string-array name="state">
+        <item>Johor</item>
+        <item>Kedah</item>
+        <item>Kelantan</item>
+        <item>Melaka</item>
+        <item>Negeri Sembilan</item>
+        <item>Pahang</item>
+        <item>Perlis</item>
+        <item>Pulau Pinang</item>
+        <item>Perak</item>
+        <item>Sabah</item>
+        <item>Selangor</item>
+        <item>Sarawak</item>
+        <item>Terengganu</item>
+        <item>Wilayah Persekutuan</item>
+    </string-array>
+    <string-array name="district_Johor">
+        <item>Pulau Aur dan Pulau Pemanggil</item>
+        <item>Johor Bharu, Kota Tinggi, Mersing</item>
+        <item>Kluang, Pontian</item>
+        <item>Batu Pahat, Muar, Segamat, Gemas Johor</item>
+    </string-array>
+    <string-array name="district_Kedah">
+        <item>Kota Setar, Kubang Pasu, Pokok Sena (Daerah Kecil)</item>
+        <item>Kuala Muda, Yan, Pendang</item>
+        <item>Padang Terap, Sik</item>
+        <item>Baling</item>
+        <item>Bandar Baharu, Kulim</item>
+        <item>Langkawi</item>
+        <item>Gunung Jerai</item>
+    </string-array>
+    <string-array name="district_Kelantan">
+        <item>Bachok, Kota Bharu, Machang, Pasir Mas, Pasir Puteh, Tanah Merah, Tumpat, Kuala Krai, Mukim Chiku</item>
+        <item>Gua Musang (Daerah Galas Dan Bertam), Jeli</item>
+    </string-array>
+    <string-array name="district_Melaka">
+        <item>Seluruh Negeri Melaka</item>
+    </string-array>
+    <string-array name="district_Negeri_Sembilan">
+        <item>Tampin, Jempol</item>
+        <item>Jelebu, Kuala Pilah, Port Dickson, Rembau, Seremban</item>
+    </string-array>
+    <string-array name="district_Pahang">
+        <item>Pulau Tioman</item>
+        <item>Kuantan, Pekan, Rompin, Muadzam Shah</item>
+        <item>Jerantut, Temerloh, Maran, Bera, Chenor, Jengka</item>
+        <item>Bentong, Lipis, Raub</item>
+        <item>Genting Sempah, Janda Baik, Bukit Tinggi</item>
+        <item>Cameron Highlands, Genting Higlands, Bukit Fraser</item>
+    </string-array>
+    <string-array name="district_Perlis">
+        <item>Kangar, Padang Besar, Arau</item>
+    </string-array>
+    <string-array name="district_Pulau_Pinang">
+        <item>Seluruh Negeri Pulau Pinang</item>
+    </string-array>
+    <string-array name="district_Perak">
+        <item>Tapah, Slim River, Tanjung Malim</item>
+        <item>Kuala Kangsar, Sg. Siput (Daerah Kecil), Ipoh, Batu Gajah, Kampar</item>
+        <item>Lenggong, Pengkalan Hulu, Grik</item>
+        <item>Temengor, Belum</item>
+        <item>Kg Gajah, Teluk Intan, Bagan Datuk, Seri Iskandar, Beruas, Parit, Lumut, Sitiawan, Pulau Pangkor</item>
+        <item>Selama, Taiping, Bagan Serai, Parit Buntar</item>
+        <item>Bukit Larut</item>
+    </string-array>
+    <string-array name="district_Sabah">
+        <item>Bahagian Sandakan (Timur), Bukit Garam, Semawang, Temanggong, Tambisan, Bandar Sandakan</item>
+        <item>Beluran, Telupid, Pinangah, Terusan, Kuamut, Bahagian Sandakan (Barat)</item>
+        <item>Lahad Datu, Silabukan, Kunak, Sahabat, Semporna, Tungku, Bahagian Tawau  (Timur)</item>
+        <item>Bandar Tawau, Balong, Merotai, Kalabakan, Bahagian Tawau (Barat)</item>
+        <item>Kudat, Kota Marudu, Pitas, Pulau Banggi, Bahagian Kudat</item>
+        <item>Gunung Kinabalu</item>
+        <item>Kota Kinabalu, Ranau, Kota Belud, Tuaran, Penampang, Papar, Putatan, Bahagian Pantai Barat</item>
+        <item>Pensiangan, Keningau, Tambunan, Nabawan, Bahagian Pendalaman (Atas)</item>
+        <item>Beaufort, Kuala Penyu, Sipitang, Tenom, Long Pa Sia, Membakut, Weston, Bahagian Pendalaman (Bawah)</item>
+    </string-array>
+    <string-array name="district_Selangor">
+        <item>Gombak, Petaling, Sepang, Hulu Langat, Hulu Selangor, Rawang, S.Alam</item>
+        <item>Kuala Selangor, Sabak Bernam</item>
+        <item>Klang, Kuala Langat</item>
+    </string-array>
+    <string-array name="district_Sarawak">
+        <item>Limbang, Lawas, Sundar, Trusan</item>
+        <item>Miri, Niah, Bekenu, Sibuti, Marudi</item>
+        <item>Pandan, Belaga, Suai, Tatau, Sebauh, Bintulu</item>
+        <item>Sibu, Mukah, Dalat, Song, Igan, Oya, Balingian, Kanowit, Kapit</item>
+        <item>Sarikei, Matu, Julau, Rajang, Daro, Bintangor, Belawai</item>
+        <item>Lubok Antu, Sri Aman, Roban, Debak, Kabong, Lingga, Engkelili, Betong, Spaoh, Pusa, Saratok</item>
+        <item>Serian, Simunjan, Samarahan, Sebuyau, Meludam</item>
+        <item>Kuching, Bau, Lundu, Sematan</item>
+        <item>Zon Khas (Kampung Patarikan)</item>
+    </string-array>
+    <string-array name="district_Terengganu">
+        <item>Kuala Terengganu, Marang, Kuala Nerus</item>
+        <item>Besut, Setiu</item>
+        <item>Hulu Terengganu</item>
+        <item>Dungun, Kemaman</item>
+    </string-array>
+    <string-array name="district_Wilayah_Persekutuan">
+        <item>Kuala Lumpur, Putrajaya</item>
+        <item>Labuan</item>
     </string-array>
 </resources>

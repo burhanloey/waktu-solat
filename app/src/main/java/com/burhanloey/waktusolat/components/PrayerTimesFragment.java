@@ -83,12 +83,13 @@ public class PrayerTimesFragment extends DaggerFragment {
     }
 
     /**
-     * Same with loadPrayerTime(String) but takes spinner position.
+     * Same with loadPrayerTime(String) but takes spinners position.
      *
-     * @param position Spinner position
+     * @param statePosition State spinner position
+     * @param districtPosition District spinner position
      */
-    public void loadPrayerTime(int position) {
-        String districtCode = ESolat.getDistrictCode(position);
+    public void loadPrayerTime(int statePosition, int districtPosition) {
+        String districtCode = ESolat.getDistrictCode(statePosition, districtPosition);
         loadPrayerTime(districtCode);
     }
 }

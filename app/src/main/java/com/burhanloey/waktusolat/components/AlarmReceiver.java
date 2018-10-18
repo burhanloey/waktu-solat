@@ -39,7 +39,7 @@ public class AlarmReceiver extends DaggerBroadcastReceiver {
      */
     private void callForPrayer(Context context, String title, String text) {
         Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
-                .setSmallIcon(R.mipmap.ic_launcher)
+                .setSmallIcon(R.mipmap.logo)
                 .setContentTitle(title)
                 .setContentText(text)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
@@ -75,7 +75,6 @@ public class AlarmReceiver extends DaggerBroadcastReceiver {
         callForPrayer(context, title, text);
         wake(context);
 
-        Intent nextAlarmIntent = new Intent(context, NextAlarmService.class);
-        NextAlarmService.enqueueWork(context, nextAlarmIntent);
+        NextAlarmService.enqueueWork(context);
     }
 }

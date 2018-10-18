@@ -51,7 +51,7 @@ public class PrayerAlarmManager {
     /**
      * Set up alarm in AlarmManager.
      */
-    private void set(List<PrayerTime> prayerTimes) {
+    private void setupAlarm(List<PrayerTime> prayerTimes) {
         AlarmInfo alarmInfo = nextAlarm(prayerTimes);
 
         Intent intent = new Intent(context, AlarmReceiver.class);
@@ -72,13 +72,14 @@ public class PrayerAlarmManager {
      * Set next alarm according to current selection of district.
      */
     public void setNextAlarm() {
-        int position = stateManager.getPosition();
-        String districtCode = ESolat.getDistrictCode(position);
+        int statePosition = stateManager.getStatePosition();
+        int districtPosition = stateManager.getDistrictPosition();
+        String districtCode = ESolat.getDistrictCode(statePosition, districtPosition);
 
         eSolatManager.load(districtCode, new LoadCallback() {
             @Override
             public void onResponse(List<PrayerTime> prayerTimes) {
-                set(prayerTimes);
+                setupAlarm(prayerTimes);
             }
 
             @Override
