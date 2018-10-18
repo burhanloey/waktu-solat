@@ -64,9 +64,18 @@ public class MainActivity extends DaggerAppCompatActivity {
         }
     }
 
+    private void loadDistricts(int statePosition) {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                ESolat.getDistrictArray(statePosition), android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        districtSpinner.setAdapter(adapter);
+    }
+
     private void loadPreviousState() {
         int statePosition = stateManager.getStatePosition();
         stateSpinner.setSelection(statePosition);
+
+        loadDistricts(statePosition);
 
         int districtPosition = stateManager.getDistrictPosition();
         districtSpinner.setSelection(districtPosition);
@@ -131,10 +140,7 @@ public class MainActivity extends DaggerAppCompatActivity {
 
     @OnItemSelected(R.id.state_spinner)
     public void selectState(int statePosition) {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                ESolat.getDistrictArray(statePosition), android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        districtSpinner.setAdapter(adapter);
+        loadDistricts(statePosition);
 
         stateManager.saveStatePosition(statePosition);
 
