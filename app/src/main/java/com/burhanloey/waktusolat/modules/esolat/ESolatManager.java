@@ -25,10 +25,10 @@ public class ESolatManager {
      * Fetch data from API, and then save to database. Supply FetchCallback for things to do during
      * API failure, and after success. The callbacks will run on UI thread.
      *
-     * @param districtCode District code for which data to fetch for
+     * @param districtCode District code for which data to download for
      * @param callback FetchCallback for API failure and on success
      */
-    public void fetch(final String districtCode, final FetchCallback callback) {
+    public void download(final String districtCode, final FetchCallback callback) {
         eSolatApi.yearlyPrayerTimes(districtCode)
                 .enqueue(new Callback<YearlyPrayerTimes>() {
                     @Override

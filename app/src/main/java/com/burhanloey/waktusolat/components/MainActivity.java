@@ -46,8 +46,8 @@ public class MainActivity extends DaggerAppCompatActivity {
     @BindView(R.id.district_spinner)
     Spinner districtSpinner;
 
-    @BindView(R.id.fetch_button)
-    Button fetchButton;
+    @BindView(R.id.download_button)
+    Button downloadButton;
 
     @BindView(R.id.progress_bar)
     ProgressBar progressBar;
@@ -99,8 +99,8 @@ public class MainActivity extends DaggerAppCompatActivity {
      * Show visual cues that the app is loading.
      */
     private void showLoading() {
-        fetchButton.setText(R.string.fetching);
-        fetchButton.setEnabled(false);
+        downloadButton.setText(R.string.downloading);
+        downloadButton.setEnabled(false);
         progressBar.setVisibility(View.VISIBLE);
     }
 
@@ -108,20 +108,20 @@ public class MainActivity extends DaggerAppCompatActivity {
      * Hide loading visual cues.
      */
     private void hideLoading() {
-        fetchButton.setText(R.string.fetch);
-        fetchButton.setEnabled(true);
+        downloadButton.setText(R.string.download);
+        downloadButton.setEnabled(true);
         progressBar.setVisibility(View.GONE);
     }
 
-    @OnClick(R.id.fetch_button)
-    public void fetch(View view) {
+    @OnClick(R.id.download_button)
+    public void download(View view) {
         int statePosition = stateSpinner.getSelectedItemPosition();
         int districtPosition = districtSpinner.getSelectedItemPosition();
         final String districtCode = ESolat.getDistrictCode(statePosition, districtPosition);
 
         showLoading();
 
-        eSolatManager.fetch(districtCode, new FetchCallback() {
+        eSolatManager.download(districtCode, new FetchCallback() {
             @Override
             public void onCompleted() {
                 hideLoading();
