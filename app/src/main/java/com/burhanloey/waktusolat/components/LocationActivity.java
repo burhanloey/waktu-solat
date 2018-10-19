@@ -1,7 +1,6 @@
 package com.burhanloey.waktusolat.components;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -137,7 +136,6 @@ public class LocationActivity extends DaggerAppCompatActivity {
 
     @OnClick(R.id.back_button)
     public void back() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        finish();
     }
 }
