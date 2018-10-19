@@ -15,16 +15,19 @@ import java.util.List;
  * A service to format time and date.
  */
 public class TimeFormatter {
-    private final DateFormat dateFormat;
-    private final DateFormat fromDateFormat;
-    private final DateFormat toDateFormat;
+    private final DateFormat dateKeyFormat;
+    private final DateFormat dateDisplayFormat;
+    private final DateFormat timeFromFormat;
+    private final DateFormat timeToFormat;
 
-    public TimeFormatter(DateFormat dateFormat,
-                         DateFormat fromDateFormat,
-                         DateFormat toDateFormat) {
-        this.dateFormat = dateFormat;
-        this.fromDateFormat = fromDateFormat;
-        this.toDateFormat = toDateFormat;
+    public TimeFormatter(DateFormat dateKeyFormat,
+                         DateFormat dateDisplayFormat,
+                         DateFormat timeFromFormat,
+                         DateFormat timeToFormat) {
+        this.dateKeyFormat = dateKeyFormat;
+        this.dateDisplayFormat = dateDisplayFormat;
+        this.timeFromFormat = timeFromFormat;
+        this.timeToFormat = timeToFormat;
     }
 
     /**
@@ -46,12 +49,21 @@ public class TimeFormatter {
     }
 
     /**
+     * Get today's day and date for display.
+     *
+     * @return Day and date for display
+     */
+    public String todayDisplay() {
+        return dateDisplayFormat.format(new Date());
+    }
+
+    /**
      * Get today's date formatted to match the date from ESolat API.
      *
      * @return Today's date
      */
     public String today() {
-        return dateFormat.format(new Date());
+        return dateKeyFormat.format(new Date());
     }
 
     /**
@@ -64,7 +76,7 @@ public class TimeFormatter {
         calendar.setTime(new Date());
         calendar.add(Calendar.DATE, 1);
         Date tomorrow = calendar.getTime();
-        return dateFormat.format(tomorrow);
+        return dateKeyFormat.format(tomorrow);
     }
 
     /**
@@ -101,8 +113,8 @@ public class TimeFormatter {
      */
     private String formatTime(String from) {
         try {
-            Date date = fromDateFormat.parse(from);
-            return toDateFormat.format(date);
+            Date date = timeFromFormat.parse(from);
+            return timeToFormat.format(date);
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -114,8 +126,8 @@ public class TimeFormatter {
      */
     private long toMillis(String date, String time) {
         try {
-            Date dateInfo = dateFormat.parse(date);
-            Date timeInfo = fromDateFormat.parse(time);
+            Date dateInfo = dateKeyFormat.parse(date);
+            Date timeInfo = timeFromFormat.parse(time);
 
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(dateInfo);

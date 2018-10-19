@@ -1,22 +1,16 @@
 package com.burhanloey.waktusolat.components;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.ProgressBar;
-import android.widget.Spinner;
 import android.widget.Switch;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import com.burhanloey.waktusolat.R;
 import com.burhanloey.waktusolat.modules.alarm.PrayerAlarmManager;
-import com.burhanloey.waktusolat.modules.esolat.ESolat;
 import com.burhanloey.waktusolat.modules.esolat.ESolatManager;
-import com.burhanloey.waktusolat.modules.esolat.tasks.FetchCallback;
 import com.burhanloey.waktusolat.modules.state.StateManager;
+import com.burhanloey.waktusolat.modules.timeformat.TimeFormatter;
 
 import javax.inject.Inject;
 
@@ -24,8 +18,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
-import butterknife.OnItemSelected;
-import butterknife.OnTouch;
 import dagger.android.support.DaggerAppCompatActivity;
 
 public class MainActivity extends DaggerAppCompatActivity {
@@ -39,26 +31,18 @@ public class MainActivity extends DaggerAppCompatActivity {
     StateManager stateManager;
 
     @Inject
+    TimeFormatter timeFormatter;
+
+    @Inject
     Context context;
 
-    @BindView(R.id.state_spinner)
-    Spinner stateSpinner;
-
-    @BindView(R.id.district_spinner)
-    Spinner districtSpinner;
-
-    @BindView(R.id.download_button)
-    Button downloadButton;
-
-    @BindView(R.id.progress_bar)
-    ProgressBar progressBar;
+    @BindView(R.id.daydate_textview)
+    TextView dayDateTextView;
 
     @BindView(R.id.notifications_switch)
     Switch notificationsSwitch;
 
     PrayerTimesFragment fragment;
-
-    private boolean isInteracting = false;
 
     private void bindFragment() {
         if (fragment == null) {
@@ -67,23 +51,16 @@ public class MainActivity extends DaggerAppCompatActivity {
         }
     }
 
-    private void loadDistricts(int statePosition) {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                ESolat.getDistrictArray(statePosition), android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        districtSpinner.setAdapter(adapter);
+    private void loadFragment() {
+        int statePosition = stateManager.getStatePosition();
+        int districtPosition = stateManager.getDistrictPosition();
+        fragment.loadPrayerTime(statePosition, districtPosition);
     }
 
-    private void loadPreviousState() {
-        int statePosition = stateManager.getStatePosition();
-        stateSpinner.setSelection(statePosition);
+    private void init() {
+        dayDateTextView.setText(timeFormatter.todayDisplay());
 
-        loadDistricts(statePosition);
-
-        int districtPosition = stateManager.getDistrictPosition();
-        districtSpinner.setSelection(districtPosition);
-
-        fragment.loadPrayerTime(statePosition, districtPosition);
+        loadFragment();
 
         boolean isChecked = stateManager.getNotificationsEnabled();
         notificationsSwitch.setChecked(isChecked);
@@ -95,80 +72,17 @@ public class MainActivity extends DaggerAppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         bindFragment();
-        loadPreviousState();
+        init();
     }
 
-    /**
-     * Show visual cues that the app is loading.
-     */
-    private void showLoading() {
-        downloadButton.setText(R.string.downloading);
-        downloadButton.setEnabled(false);
-        progressBar.setVisibility(View.VISIBLE);
-    }
-
-    /**
-     * Hide loading visual cues.
-     */
-    private void hideLoading() {
-        downloadButton.setText(R.string.download);
-        downloadButton.setEnabled(true);
-        progressBar.setVisibility(View.GONE);
-    }
-
-    @OnClick(R.id.download_button)
-    public void download(View view) {
-        int statePosition = stateSpinner.getSelectedItemPosition();
-        int districtPosition = districtSpinner.getSelectedItemPosition();
-        final String districtCode = ESolat.getDistrictCode(statePosition, districtPosition);
-
-        showLoading();
-
-        eSolatManager.download(districtCode, new FetchCallback() {
-            @Override
-            public void onCompleted() {
-                hideLoading();
-
-                fragment.loadPrayerTime(districtCode);
-            }
-
-            @Override
-            public void onFailure(String message) {
-                hideLoading();
-
-                Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    @OnItemSelected(R.id.state_spinner)
-    public void selectState(int statePosition) {
-        if (isInteracting) {
-            loadDistricts(statePosition);
-
-            stateManager.saveStatePosition(statePosition);
-
-            int districtPosition = districtSpinner.getSelectedItemPosition();
-            fragment.loadPrayerTime(statePosition, districtPosition);
-        }
-    }
-
-    @OnTouch(R.id.state_spinner)
-    public boolean interact() {
-        isInteracting = true;
-        return false;  // to not consume event (like not calling preventDefault() in JavaScript)
-    }
-
-    @OnItemSelected(R.id.district_spinner)
-    public void selectDistrict(int districtPosition) {
-        stateManager.saveDistrictPosition(districtPosition);
-
-        int statePosition = stateSpinner.getSelectedItemPosition();
-        fragment.loadPrayerTime(statePosition, districtPosition);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadFragment();
     }
 
     @OnCheckedChanged(R.id.notifications_switch)
-    public void notify(CompoundButton button, boolean isChecked) {
+    public void notify(boolean isChecked) {
         stateManager.saveNotificationsEnabled(isChecked);
 
         if (isChecked) {
@@ -176,5 +90,11 @@ public class MainActivity extends DaggerAppCompatActivity {
         } else {
             prayerAlarmManager.cancelAlarm();
         }
+    }
+
+    @OnClick(R.id.location_button)
+    public void chooseLocation() {
+        Intent intent = new Intent(this, LocationActivity.class);
+        startActivity(intent);
     }
 }

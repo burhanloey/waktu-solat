@@ -11,6 +11,9 @@
     <string name="notifications">Show notifications</string>
     <string name="negeri">Negeri</string>
     <string name="daerah">Daerah</string>
+    <string name="choose_location">Choose Location</string>
+    <string name="disclaimer">The data will be downloaded directly from e-Solat Portal. If there is any inaccuracy, kindly contact e-Solat Portal.</string>
+    <string name="back">Back</string>
     <string-array name="state">
         <item>Johor</item>
         <item>Kedah</item>

@@ -1,123 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TableLayout
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/subuh_textview"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="@string/subuh"
+        app:layout_constraintEnd_toStartOf="@+id/subuhtime_textview"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="8dp">
+    <TextView
+        android:id="@+id/subuhtime_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="end"
+        android:text="@string/not_available"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/subuh_textview"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/subuh_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/subuh" />
+    <TextView
+        android:id="@+id/zuhur_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/zuhur"
+        app:layout_constraintStart_toStartOf="@+id/subuh_textview"
+        app:layout_constraintTop_toBottomOf="@+id/subuh_textview" />
 
-            <TextView
-                android:id="@+id/subuhtime_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="@string/not_available" />
-        </TableRow>
+    <TextView
+        android:id="@+id/zuhurtime_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="@string/not_available"
+        app:layout_constraintBottom_toBottomOf="@+id/zuhur_textview"
+        app:layout_constraintEnd_toEndOf="@+id/subuhtime_textview"
+        app:layout_constraintTop_toTopOf="@+id/zuhur_textview" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="8dp">
+    <TextView
+        android:id="@+id/asar_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/asar"
+        app:layout_constraintStart_toStartOf="@+id/zuhur_textview"
+        app:layout_constraintTop_toBottomOf="@+id/zuhur_textview" />
 
-            <TextView
-                android:id="@+id/zuhur_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/zuhur" />
+    <TextView
+        android:id="@+id/asartime_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="@string/not_available"
+        app:layout_constraintBottom_toBottomOf="@+id/asar_textview"
+        app:layout_constraintEnd_toEndOf="@+id/zuhurtime_textview"
+        app:layout_constraintTop_toTopOf="@+id/asar_textview" />
 
-            <TextView
-                android:id="@+id/zuhurtime_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="@string/not_available" />
-        </TableRow>
+    <TextView
+        android:id="@+id/maghrib_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/maghrib"
+        app:layout_constraintStart_toStartOf="@+id/asar_textview"
+        app:layout_constraintTop_toBottomOf="@+id/asar_textview" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="8dp">
+    <TextView
+        android:id="@+id/maghribtime_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="@string/not_available"
+        app:layout_constraintBottom_toBottomOf="@+id/maghrib_textview"
+        app:layout_constraintEnd_toEndOf="@+id/asartime_textview"
+        app:layout_constraintTop_toTopOf="@+id/maghrib_textview" />
 
-            <TextView
-                android:id="@+id/asar_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/asar" />
+    <TextView
+        android:id="@+id/isha_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/isha"
+        app:layout_constraintStart_toStartOf="@+id/maghrib_textview"
+        app:layout_constraintTop_toBottomOf="@+id/maghrib_textview" />
 
-            <TextView
-                android:id="@+id/asartime_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="@string/not_available" />
-        </TableRow>
+    <TextView
+        android:id="@+id/ishatime_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        android:text="@string/not_available"
+        app:layout_constraintBottom_toBottomOf="@+id/isha_textview"
+        app:layout_constraintEnd_toEndOf="@+id/maghribtime_textview"
+        app:layout_constraintTop_toTopOf="@+id/isha_textview" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="8dp">
-
-            <TextView
-                android:id="@+id/maghrib_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/maghrib" />
-
-            <TextView
-                android:id="@+id/maghribtime_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="@string/not_available" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="8dp">
-
-            <TextView
-                android:id="@+id/isha_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/isha" />
-
-            <TextView
-                android:id="@+id/ishatime_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="end"
-                android:text="@string/not_available" />
-        </TableRow>
-
-    </TableLayout>
 </android.support.constraint.ConstraintLayout>

@@ -23,10 +23,10 @@ public interface PrayerTimeDao {
 
     /**
      * Insert a list of prayer times into the database. If the data already exists, they will be
-     * ignored.
+     * replaced.
      *
      * @param prayerTimes List of prayer times.
      */
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(List<PrayerTime> prayerTimes);
 }
