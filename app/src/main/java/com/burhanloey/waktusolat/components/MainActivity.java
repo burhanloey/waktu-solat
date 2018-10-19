@@ -25,6 +25,7 @@ import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
+import butterknife.OnTouch;
 import dagger.android.support.DaggerAppCompatActivity;
 
 public class MainActivity extends DaggerAppCompatActivity {
@@ -56,6 +57,8 @@ public class MainActivity extends DaggerAppCompatActivity {
     Switch notificationsSwitch;
 
     PrayerTimesFragment fragment;
+
+    private boolean isInteracting = false;
 
     private void bindFragment() {
         if (fragment == null) {
@@ -140,12 +143,20 @@ public class MainActivity extends DaggerAppCompatActivity {
 
     @OnItemSelected(R.id.state_spinner)
     public void selectState(int statePosition) {
-        loadDistricts(statePosition);
+        if (isInteracting) {
+            loadDistricts(statePosition);
 
-        stateManager.saveStatePosition(statePosition);
+            stateManager.saveStatePosition(statePosition);
 
-        int districtPosition = districtSpinner.getSelectedItemPosition();
-        fragment.loadPrayerTime(statePosition, districtPosition);
+            int districtPosition = districtSpinner.getSelectedItemPosition();
+            fragment.loadPrayerTime(statePosition, districtPosition);
+        }
+    }
+
+    @OnTouch(R.id.state_spinner)
+    public boolean interact() {
+        isInteracting = true;
+        return false;  // to not consume event (like not calling preventDefault() in JavaScript)
     }
 
     @OnItemSelected(R.id.district_spinner)
