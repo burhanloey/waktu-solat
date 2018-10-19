@@ -1,6 +1,7 @@
 package com.burhanloey.waktusolat;
 
 import com.burhanloey.waktusolat.components.AlarmReceiver;
+import com.burhanloey.waktusolat.components.LocationActivity;
 import com.burhanloey.waktusolat.components.MainActivity;
 import com.burhanloey.waktusolat.components.NextAlarmService;
 import com.burhanloey.waktusolat.components.PrayerTimesFragment;
@@ -12,6 +13,9 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class BuildersModule {
     @ContributesAndroidInjector
     abstract MainActivity bindMainActivity();
+
+    @ContributesAndroidInjector
+    abstract LocationActivity bindLocationActivity();
 
     @ContributesAndroidInjector
     abstract PrayerTimesFragment bindPrayerTimesFragment();
