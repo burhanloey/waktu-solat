@@ -9,6 +9,7 @@ import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.burhanloey.waktusolat.R;
@@ -17,6 +18,7 @@ import com.burhanloey.waktusolat.modules.esolat.ESolat;
 import com.burhanloey.waktusolat.modules.esolat.ESolatManager;
 import com.burhanloey.waktusolat.modules.esolat.tasks.FetchCallback;
 import com.burhanloey.waktusolat.modules.state.StateManager;
+import com.burhanloey.waktusolat.modules.timeformat.TimeFormatter;
 
 import javax.inject.Inject;
 
@@ -39,7 +41,13 @@ public class MainActivity extends DaggerAppCompatActivity {
     StateManager stateManager;
 
     @Inject
+    TimeFormatter timeFormatter;
+
+    @Inject
     Context context;
+
+    @BindView(R.id.daydate_textview)
+    TextView dayDateTextView;
 
     @BindView(R.id.state_spinner)
     Spinner stateSpinner;
@@ -74,7 +82,9 @@ public class MainActivity extends DaggerAppCompatActivity {
         districtSpinner.setAdapter(adapter);
     }
 
-    private void loadPreviousState() {
+    private void init() {
+        dayDateTextView.setText(timeFormatter.todayDisplay());
+
         int statePosition = stateManager.getStatePosition();
         stateSpinner.setSelection(statePosition);
 
@@ -95,7 +105,7 @@ public class MainActivity extends DaggerAppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         bindFragment();
-        loadPreviousState();
+        init();
     }
 
     /**
