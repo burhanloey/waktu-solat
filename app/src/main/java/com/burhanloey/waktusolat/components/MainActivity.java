@@ -83,7 +83,7 @@ public class MainActivity extends DaggerAppCompatActivity {
     }
 
     @OnCheckedChanged(R.id.notifications_switch)
-    public void notify(CompoundButton button, boolean isChecked) {
+    public void notify(boolean isChecked) {
         stateManager.saveNotificationsEnabled(isChecked);
 
         if (isChecked) {
