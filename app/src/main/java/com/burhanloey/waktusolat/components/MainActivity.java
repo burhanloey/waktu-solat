@@ -3,7 +3,6 @@ package com.burhanloey.waktusolat.components;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 
