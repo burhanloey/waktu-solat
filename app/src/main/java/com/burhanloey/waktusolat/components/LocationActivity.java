@@ -48,14 +48,23 @@ public class LocationActivity extends DaggerAppCompatActivity {
 
     private boolean isInteracting = false;
 
+    private void loadStates() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.state, R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_item);
+        stateSpinner.setAdapter(adapter);
+    }
+
     private void loadDistricts(int statePosition) {
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                ESolat.getDistrictArray(statePosition), android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                ESolat.getDistrictArray(statePosition), R.layout.spinner_item);
+        adapter.setDropDownViewResource(R.layout.spinner_item);
         districtSpinner.setAdapter(adapter);
     }
 
     private void init() {
+        loadStates();
+
         int statePosition = stateManager.getStatePosition();
         stateSpinner.setSelection(statePosition);
 
