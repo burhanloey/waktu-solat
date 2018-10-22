@@ -39,6 +39,7 @@ public class AlarmReceiver extends DaggerBroadcastReceiver {
      */
     private void callForPrayer(Context context, String title, String text) {
         Notification notification = new NotificationCompat.Builder(context, CHANNEL_ID)
+                .setColor(context.getResources().getColor(android.R.color.white))
                 .setSmallIcon(R.mipmap.logo)
                 .setContentTitle(title)
                 .setContentText(text)
