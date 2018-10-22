@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/subuh"
+        android:textColor="@color/colorBrown"
         app:layout_constraintEnd_toStartOf="@+id/subuhtime_textview"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,6 +24,7 @@
         android:layout_marginTop="16dp"
         android:gravity="end"
         android:text="@string/not_available"
+        android:textColor="@color/colorBrown"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/subuh_textview"
@@ -34,6 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/zuhur"
+        android:textColor="@color/colorBrown"
         app:layout_constraintStart_toStartOf="@+id/subuh_textview"
         app:layout_constraintTop_toBottomOf="@+id/subuh_textview" />
 
@@ -43,6 +46,7 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         android:text="@string/not_available"
+        android:textColor="@color/colorBrown"
         app:layout_constraintBottom_toBottomOf="@+id/zuhur_textview"
         app:layout_constraintEnd_toEndOf="@+id/subuhtime_textview"
         app:layout_constraintTop_toTopOf="@+id/zuhur_textview" />
@@ -53,6 +57,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/asar"
+        android:textColor="@color/colorBrown"
         app:layout_constraintStart_toStartOf="@+id/zuhur_textview"
         app:layout_constraintTop_toBottomOf="@+id/zuhur_textview" />
 
@@ -62,6 +67,7 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         android:text="@string/not_available"
+        android:textColor="@color/colorBrown"
         app:layout_constraintBottom_toBottomOf="@+id/asar_textview"
         app:layout_constraintEnd_toEndOf="@+id/zuhurtime_textview"
         app:layout_constraintTop_toTopOf="@+id/asar_textview" />
@@ -72,6 +78,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/maghrib"
+        android:textColor="@color/colorBrown"
         app:layout_constraintStart_toStartOf="@+id/asar_textview"
         app:layout_constraintTop_toBottomOf="@+id/asar_textview" />
 
@@ -81,6 +88,7 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         android:text="@string/not_available"
+        android:textColor="@color/colorBrown"
         app:layout_constraintBottom_toBottomOf="@+id/maghrib_textview"
         app:layout_constraintEnd_toEndOf="@+id/asartime_textview"
         app:layout_constraintTop_toTopOf="@+id/maghrib_textview" />
@@ -91,6 +99,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/isha"
+        android:textColor="@color/colorBrown"
         app:layout_constraintStart_toStartOf="@+id/maghrib_textview"
         app:layout_constraintTop_toBottomOf="@+id/maghrib_textview" />
 
@@ -100,6 +109,7 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         android:text="@string/not_available"
+        android:textColor="@color/colorBrown"
         app:layout_constraintBottom_toBottomOf="@+id/isha_textview"
         app:layout_constraintEnd_toEndOf="@+id/maghribtime_textview"
         app:layout_constraintTop_toTopOf="@+id/isha_textview" />
