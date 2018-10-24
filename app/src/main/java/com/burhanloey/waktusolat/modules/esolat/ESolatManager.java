@@ -50,7 +50,7 @@ public class ESolatManager {
 
                     @Override
                     public void onFailure(@NonNull Call<YearlyPrayerTimes> call,
-                                          @NonNull final Throwable t) {
+                                          @NonNull Throwable t) {
                         callback.onFailure(t.getMessage());
                     }
                 });
@@ -63,7 +63,7 @@ public class ESolatManager {
      * @param districtCode District code for which data to load for
      * @param callback LoadCallback on response and on missing data
      */
-    public void load(final String districtCode, final LoadCallback callback) {
+    public void load(String districtCode, LoadCallback callback) {
         taskManager.loadPrayerTimes(districtCode, callback);
     }
 }
