@@ -15,15 +15,18 @@ import java.util.List;
  * A service to format time and date.
  */
 public class TimeFormatter {
+    private final DateFormat yearFormat;
     private final DateFormat dateKeyFormat;
     private final DateFormat dateDisplayFormat;
     private final DateFormat timeFromFormat;
     private final DateFormat timeToFormat;
 
-    public TimeFormatter(DateFormat dateKeyFormat,
+    public TimeFormatter(DateFormat yearFormat,
+                         DateFormat dateKeyFormat,
                          DateFormat dateDisplayFormat,
                          DateFormat timeFromFormat,
                          DateFormat timeToFormat) {
+        this.yearFormat = yearFormat;
         this.dateKeyFormat = dateKeyFormat;
         this.dateDisplayFormat = dateDisplayFormat;
         this.timeFromFormat = timeFromFormat;
@@ -46,6 +49,15 @@ public class TimeFormatter {
         formatted.add(formatTime(prayerTime.getIsha()));
 
         return formatted;
+    }
+
+    /**
+     * Get current year.
+     *
+     * @return Current year
+     */
+    public String currentYear() {
+        return yearFormat.format(new Date());
     }
 
     /**

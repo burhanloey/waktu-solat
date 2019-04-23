@@ -4,7 +4,7 @@ import com.burhanloey.waktusolat.modules.esolat.model.YearlyPrayerTimes;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
-import retrofit2.http.Query;
+import retrofit2.http.Path;
 
 public interface ESolatApi {
     /**
@@ -13,6 +13,6 @@ public interface ESolatApi {
      * @param zone Zone/district code
      * @return Yearly prayer times
      */
-    @GET("index.php?r=esolatApi/takwimsolat&period=year")
-    Call<YearlyPrayerTimes> yearlyPrayerTimes(@Query("zone") String zone);
+    @GET("waktu-solat/calendar/{year}/{zone}.json")
+    Call<YearlyPrayerTimes> yearlyPrayerTimes(@Path("year") String year, @Path("zone") String zone);
 }

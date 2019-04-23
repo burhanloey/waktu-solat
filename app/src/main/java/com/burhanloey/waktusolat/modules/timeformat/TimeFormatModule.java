@@ -20,6 +20,12 @@ public class TimeFormatModule {
     }
 
     @Provides
+    @Named("year")
+    DateFormat provideYearFormat(@Named("ms-my") Locale locale) {
+        return new SimpleDateFormat("yyyy", locale);
+    }
+
+    @Provides
     @Named("date-key")
     DateFormat provideDateFormatforDateKey(@Named("ms-my") Locale locale) {
         return new SimpleDateFormat("dd-MMM-yyyy", locale);
@@ -46,10 +52,12 @@ public class TimeFormatModule {
     }
 
     @Provides
-    TimeFormatter provideTimeFormatter(@Named("date-key") DateFormat dateKeyFormat,
+    TimeFormatter provideTimeFormatter(@Named("year") DateFormat yearFormat,
+                                       @Named("date-key") DateFormat dateKeyFormat,
                                        @Named("date-display") DateFormat dateDisplayFormat,
                                        @Named("time-from") DateFormat timeFromFormat,
                                        @Named("time-to") DateFormat timeToFormat) {
-        return new TimeFormatter(dateKeyFormat, dateDisplayFormat, timeFromFormat, timeToFormat);
+        return new TimeFormatter(
+                yearFormat, dateKeyFormat, dateDisplayFormat, timeFromFormat, timeToFormat);
     }
 }

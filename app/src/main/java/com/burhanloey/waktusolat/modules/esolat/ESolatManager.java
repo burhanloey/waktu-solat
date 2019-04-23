@@ -7,6 +7,7 @@ import com.burhanloey.waktusolat.modules.esolat.model.YearlyPrayerTimes;
 import com.burhanloey.waktusolat.modules.esolat.tasks.FetchCallback;
 import com.burhanloey.waktusolat.modules.esolat.tasks.LoadCallback;
 import com.burhanloey.waktusolat.modules.esolat.tasks.TaskManager;
+import com.burhanloey.waktusolat.modules.timeformat.TimeFormatter;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,10 +16,12 @@ import retrofit2.Response;
 public class ESolatManager {
     private final ESolatApi eSolatApi;
     private final TaskManager taskManager;
+    private final TimeFormatter timeFormatter;
 
-    public ESolatManager(ESolatApi eSolatApi, TaskManager taskManager) {
+    public ESolatManager(ESolatApi eSolatApi, TaskManager taskManager, TimeFormatter timeFormatter) {
         this.eSolatApi = eSolatApi;
         this.taskManager = taskManager;
+        this.timeFormatter = timeFormatter;
     }
 
     /**
@@ -29,7 +32,7 @@ public class ESolatManager {
      * @param callback FetchCallback for API failure and on success
      */
     public void download(final String districtCode, final FetchCallback callback) {
-        eSolatApi.yearlyPrayerTimes(districtCode)
+        eSolatApi.yearlyPrayerTimes(timeFormatter.currentYear(), districtCode)
                 .enqueue(new Callback<YearlyPrayerTimes>() {
                     @Override
                     public void onResponse(@NonNull Call<YearlyPrayerTimes> call,

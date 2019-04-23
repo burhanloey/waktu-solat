@@ -35,7 +35,7 @@ public class ESolatModule {
     }
 
     @Provides
-    ESolatManager provideESolatManager(ESolatApi eSolatApi, TaskManager taskManager) {
-        return new ESolatManager(eSolatApi, taskManager);
+    ESolatManager provideESolatManager(ESolatApi eSolatApi, TaskManager taskManager, TimeFormatter timeFormatter) {
+        return new ESolatManager(eSolatApi, taskManager, timeFormatter);
     }
 }
