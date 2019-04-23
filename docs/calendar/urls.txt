@@ -1,0 +1,143 @@
+# Johor
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=JHR01"
+output = "JHR01.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=JHR02"
+output = "JHR02.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=JHR03"
+output = "JHR03.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=JHR04"
+output = "JHR04.json"
+
+# Kedah
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=KDH01"
+output = "KDH01.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=KDH02"
+output = "KDH02.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=KDH03"
+output = "KDH03.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=KDH04"
+output = "KDH04.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=KDH05"
+output = "KDH05.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=KDH06"
+output = "KDH06.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=KDH07"
+output = "KDH07.json"
+
+# Kelantan
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=KTN01"
+output = "KTN01.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=KTN03"
+output = "KTN03.json"
+
+# Melaka
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=MLK01"
+output = "MLK01.json"
+
+# Negeri Sembilan
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=NGS01"
+output = "NGS01.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=NGS02"
+output = "NGS02.json"
+
+# Pahang
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=PHG01"
+output = "PHG01.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=PHG02"
+output = "PHG02.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=PHG03"
+output = "PHG03.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=PHG04"
+output = "PHG04.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=PHG05"
+output = "PHG05.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=PHG06"
+output = "PHG06.json"
+
+# Perlis
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=PLS01"
+output = "PLS01.json"
+
+# Pulau Pinang
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=PNG01"
+output = "PNG01.json"
+
+# Perak
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=PRK01"
+output = "PRK01.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=PRK02"
+output = "PRK02.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=PRK03"
+output = "PRK03.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=PRK04"
+output = "PRK04.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=PRK05"
+output = "PRK05.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=PRK06"
+output = "PRK06.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=PRK07"
+output = "PRK07.json"
+
+# Sabah
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SBH01"
+output = "SBH01.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SBH02"
+output = "SBH02.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SBH03"
+output = "SBH03.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SBH04"
+output = "SBH04.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SBH05"
+output = "SBH05.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SBH06"
+output = "SBH06.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SBH07"
+output = "SBH07.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SBH08"
+output = "SBH08.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SBH09"
+output = "SBH09.json"
+
+# Selangor
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SGR01"
+output = "SGR01.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SGR02"
+output = "SGR02.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SGR03"
+output = "SGR03.json"
+
+# Sarawak
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SWK01"
+output = "SWK01.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SWK02"
+output = "SWK02.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SWK03"
+output = "SWK03.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SWK04"
+output = "SWK04.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SWK05"
+output = "SWK05.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SWK06"
+output = "SWK06.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SWK07"
+output = "SWK07.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SWK08"
+output = "SWK08.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=SWK09"
+output = "SWK09.json"
+
+# Terengganu
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=TRG01"
+output = "TRG01.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=TRG02"
+output = "TRG02.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=TRG03"
+output = "TRG03.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=TRG04"
+output = "TRG04.json"
+
+# Wilayah Persekutuan
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=WLY01"
+output = "WLY01.json"
+url = "https://www.e-solat.gov.my/index.php?r=esolatApi/takwimsolat&period=year&zone=WLY02"
+output = "WLY02.json"
