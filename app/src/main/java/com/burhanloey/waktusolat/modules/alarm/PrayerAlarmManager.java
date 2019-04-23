@@ -45,7 +45,7 @@ public class PrayerAlarmManager {
             }
         }
 
-        return alarmInfos.get(0);
+        return null;
     }
 
     /**
@@ -53,6 +53,11 @@ public class PrayerAlarmManager {
      */
     private void setupAlarm(List<PrayerTime> prayerTimes) {
         AlarmInfo alarmInfo = nextAlarm(prayerTimes);
+        if (alarmInfo == null) {
+            Toast.makeText(context, "Waktu Solat: Alarm not set because data not available. " +
+                    "Wait until tomorrow to download next year data.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
         Intent intent = new Intent(context, AlarmReceiver.class);
         intent.putExtra("title", alarmInfo.getTitle());
