@@ -48,6 +48,8 @@ public class ESolatManager {
                             prayerTime.setDistrictCode(districtCode);
                         }
 
+                        callback.onSavingData();
+
                         taskManager.savePrayerTimes(yearlyPrayerTimes, callback);
                     }
 

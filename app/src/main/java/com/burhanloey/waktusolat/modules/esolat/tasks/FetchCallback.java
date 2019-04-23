@@ -5,5 +5,6 @@ package com.burhanloey.waktusolat.modules.esolat.tasks;
  */
 public interface FetchCallback {
     void onCompleted();
+    void onSavingData();
     void onFailure(String message);
 }

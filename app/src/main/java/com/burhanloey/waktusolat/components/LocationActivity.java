@@ -135,6 +135,11 @@ public class LocationActivity extends DaggerAppCompatActivity {
             }
 
             @Override
+            public void onSavingData() {
+                downloadButton.setText(R.string.saving_data);
+            }
+
+            @Override
             public void onFailure(String message) {
                 hideLoading();
 

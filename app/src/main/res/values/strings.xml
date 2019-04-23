@@ -2,6 +2,7 @@
     <string name="app_name">Waktu Solat</string>
     <string name="download">Download</string>
     <string name="downloading">Downloading…</string>
+    <string name="saving_data">Saving data…</string>
     <string name="subuh">Subuh</string>
     <string name="not_available">Not available</string>
     <string name="zuhur">Zuhur</string>
