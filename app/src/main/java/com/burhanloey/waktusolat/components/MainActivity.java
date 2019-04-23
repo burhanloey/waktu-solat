@@ -1,6 +1,5 @@
 package com.burhanloey.waktusolat.components;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Switch;
@@ -8,7 +7,6 @@ import android.widget.TextView;
 
 import com.burhanloey.waktusolat.R;
 import com.burhanloey.waktusolat.modules.alarm.PrayerAlarmManager;
-import com.burhanloey.waktusolat.modules.esolat.ESolatManager;
 import com.burhanloey.waktusolat.modules.state.StateManager;
 import com.burhanloey.waktusolat.modules.timeformat.TimeFormatter;
 
@@ -22,9 +20,6 @@ import dagger.android.support.DaggerAppCompatActivity;
 
 public class MainActivity extends DaggerAppCompatActivity {
     @Inject
-    ESolatManager eSolatManager;
-
-    @Inject
     PrayerAlarmManager prayerAlarmManager;
 
     @Inject
@@ -32,9 +27,6 @@ public class MainActivity extends DaggerAppCompatActivity {
 
     @Inject
     TimeFormatter timeFormatter;
-
-    @Inject
-    Context context;
 
     @BindView(R.id.daydate_textview)
     TextView dayDateTextView;
