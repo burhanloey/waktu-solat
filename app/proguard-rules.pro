@@ -20,25 +20,21 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
-# Retrofit does reflection on generic parameters and InnerClass is required to use Signature.
--keepattributes Signature, InnerClasses
 
-# Retain service method parameters when optimizing.
--keepclassmembers,allowshrinking,allowobfuscation interface * {
-    @retrofit2.http.* <methods>;
+##---------------Begin: proguard configuration for Volley  ----------
+
+# Prevent Proguard from inlining methods that are intentionally extracted to ensure locals have a
+# constrained liveness scope by the GC. This is needed to avoid keeping previous request references
+# alive for an indeterminate amount of time. See also https://github.com/google/volley/issues/114
+-keepclassmembers,allowshrinking,allowobfuscation class com.android.volley.NetworkDispatcher {
+    void processRequest();
+}
+-keepclassmembers,allowshrinking,allowobfuscation class com.android.volley.CacheDispatcher {
+    void processRequest();
 }
 
-# Ignore annotation used for build tooling.
--dontwarn org.codehaus.mojo.animal_sniffer.IgnoreJRERequirement
+##---------------End: proguard configuration for Volley  ----------
 
-# Ignore JSR 305 annotations for embedding nullability information.
--dontwarn javax.annotation.**
-
-# Guarded by a NoClassDefFoundError try/catch and only used when on the classpath.
--dontwarn kotlin.Unit
-
-# Top-level functions that can only be used by Kotlin.
--dontwarn retrofit2.-KotlinExtensions
 
 # https://readyandroid.wordpress.com/errorexecution-failed-for-task-apptransformclassesandresourceswithproguardforrelease/
 -ignorewarnings

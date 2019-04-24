@@ -128,7 +128,7 @@ public class LocationActivity extends DaggerAppCompatActivity {
 
         showLoading();
 
-        eSolatManager.download(districtCode, new FetchCallback() {
+        eSolatManager.download(this, districtCode, new FetchCallback() {
             @Override
             public void onCompleted() {
                 hideLoading();

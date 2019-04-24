@@ -1,10 +1,10 @@
 package com.burhanloey.waktusolat.modules.storage;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.RoomDatabase;
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
 
-import com.burhanloey.waktusolat.modules.esolat.model.PrayerTime;
 import com.burhanloey.waktusolat.modules.esolat.PrayerTimeDao;
+import com.burhanloey.waktusolat.modules.esolat.model.PrayerTime;
 
 @Database(entities = {PrayerTime.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {

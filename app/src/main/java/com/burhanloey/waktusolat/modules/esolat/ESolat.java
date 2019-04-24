@@ -3,8 +3,6 @@ package com.burhanloey.waktusolat.modules.esolat;
 import com.burhanloey.waktusolat.R;
 
 public final class ESolat {
-    public final static String URL = "https://www.burhanloey.com/";
-
     public final static String[][] DISTRICT_CODES = {
             { "JHR01", "JHR02", "JHR03", "JHR04" },
             { "KDH01", "KDH02", "KDH03", "KDH04", "KDH05", "KDH06", "KDH07" },
