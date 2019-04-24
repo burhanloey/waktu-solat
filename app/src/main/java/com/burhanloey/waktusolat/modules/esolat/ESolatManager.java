@@ -1,6 +1,6 @@
 package com.burhanloey.waktusolat.modules.esolat;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.burhanloey.waktusolat.modules.esolat.model.PrayerTime;
 import com.burhanloey.waktusolat.modules.esolat.model.YearlyPrayerTimes;
