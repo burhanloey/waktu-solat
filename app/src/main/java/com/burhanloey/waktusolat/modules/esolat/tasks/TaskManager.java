@@ -1,7 +1,7 @@
 package com.burhanloey.waktusolat.modules.esolat.tasks;
 
 import com.burhanloey.waktusolat.modules.esolat.PrayerTimeDao;
-import com.burhanloey.waktusolat.modules.esolat.model.YearlyPrayerTimes;
+import com.burhanloey.waktusolat.modules.esolat.model.PrayerTime;
 import com.burhanloey.waktusolat.modules.timeformat.TimeFormatter;
 
 public class TaskManager {
@@ -13,9 +13,11 @@ public class TaskManager {
         this.timeFormatter = timeFormatter;
     }
 
-    public void savePrayerTimes(YearlyPrayerTimes yearlyPrayerTimes, FetchCallback callback) {
+    public void savePrayerTimes(PrayerTime[] prayerTimes, FetchCallback callback) {
+        callback.onSavingData();
+
         new SavePrayerTimesTask(prayerTimeDao, callback)
-                .execute(yearlyPrayerTimes);
+                .execute(prayerTimes);
     }
 
     public void loadPrayerTimes(String districtCode, LoadCallback callback) {

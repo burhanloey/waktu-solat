@@ -28,5 +28,5 @@ public interface PrayerTimeDao {
      * @param prayerTimes List of prayer times.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertAll(List<PrayerTime> prayerTimes);
+    void insertAll(PrayerTime... prayerTimes);
 }
