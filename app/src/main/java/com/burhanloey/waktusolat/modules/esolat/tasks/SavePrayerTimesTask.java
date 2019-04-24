@@ -20,7 +20,7 @@ public class SavePrayerTimesTask extends AsyncTask<PrayerTime, Void, Void> {
 
     @Override
     protected Void doInBackground(PrayerTime... prayerTimes) {
-        prayerTimeDao.insertAll(prayerTimes);
+        prayerTimeDao.upsertAll(prayerTimes);
 
         return null;
     }
