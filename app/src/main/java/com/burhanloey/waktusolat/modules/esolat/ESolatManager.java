@@ -48,7 +48,7 @@ public class ESolatManager {
                         callback.onFailure(e.getMessage());
                     }
                 },
-                error -> callback.onFailure(error.getMessage()));
+                error -> callback.onFailure("Data not found"));
 
         requestQueue.add(request);
     }
