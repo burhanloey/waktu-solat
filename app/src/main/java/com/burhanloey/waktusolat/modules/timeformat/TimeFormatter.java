@@ -17,17 +17,20 @@ import java.util.List;
 public class TimeFormatter {
     private final DateFormat yearFormat;
     private final DateFormat dateKeyFormat;
+    private final DateFormat augustDateKeyFormat;
     private final DateFormat dateDisplayFormat;
     private final DateFormat timeFromFormat;
     private final DateFormat timeToFormat;
 
     public TimeFormatter(DateFormat yearFormat,
                          DateFormat dateKeyFormat,
+                         DateFormat augustDateKeyFormat,
                          DateFormat dateDisplayFormat,
                          DateFormat timeFromFormat,
                          DateFormat timeToFormat) {
         this.yearFormat = yearFormat;
         this.dateKeyFormat = dateKeyFormat;
+        this.augustDateKeyFormat = augustDateKeyFormat;
         this.dateDisplayFormat = dateDisplayFormat;
         this.timeFromFormat = timeFromFormat;
         this.timeToFormat = timeToFormat;
@@ -75,7 +78,15 @@ public class TimeFormatter {
      * @return Today's date
      */
     public String today() {
-        return dateKeyFormat.format(new Date());
+        Calendar calendar = Calendar.getInstance();
+
+        // The data from E-solat portal use different format for August dates which is 'Ogos'
+        // instead of the more consistent 'Ogo'.
+        if (calendar.get(Calendar.MONTH) == Calendar.AUGUST) {
+            return augustDateKeyFormat.format(calendar.getTime());
+        } else {
+            return dateKeyFormat.format(calendar.getTime());
+        }
     }
 
     /**
@@ -87,8 +98,14 @@ public class TimeFormatter {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
         calendar.add(Calendar.DATE, 1);
-        Date tomorrow = calendar.getTime();
-        return dateKeyFormat.format(tomorrow);
+
+        // The data from E-solat portal use different format for August dates which is 'Ogos'
+        // instead of the more consistent 'Ogo'.
+        if (calendar.get(Calendar.MONTH) == Calendar.AUGUST) {
+            return augustDateKeyFormat.format(calendar.getTime());
+        } else {
+            return dateKeyFormat.format(calendar.getTime());
+        }
     }
 
     /**
