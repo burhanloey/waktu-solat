@@ -32,6 +32,12 @@ public class TimeFormatModule {
     }
 
     @Provides
+    @Named("august-date-key")
+    DateFormat proviteDateFormatforAugustDate(@Named("ms-my") Locale locale) {
+        return new SimpleDateFormat("dd-MMMM-yyyy", locale);
+    }
+
+    @Provides
     @Named("date-display")
     DateFormat provideDateFormatforDayDisplay(@Named("ms-my") Locale locale) {
         return new SimpleDateFormat("EEEE, dd MMM yyyy", locale);
@@ -54,10 +60,11 @@ public class TimeFormatModule {
     @Provides
     TimeFormatter provideTimeFormatter(@Named("year") DateFormat yearFormat,
                                        @Named("date-key") DateFormat dateKeyFormat,
+                                       @Named("august-date-key") DateFormat augustDateKeyFormat,
                                        @Named("date-display") DateFormat dateDisplayFormat,
                                        @Named("time-from") DateFormat timeFromFormat,
                                        @Named("time-to") DateFormat timeToFormat) {
-        return new TimeFormatter(
-                yearFormat, dateKeyFormat, dateDisplayFormat, timeFromFormat, timeToFormat);
+        return new TimeFormatter(yearFormat, dateKeyFormat, augustDateKeyFormat,
+                dateDisplayFormat, timeFromFormat, timeToFormat);
     }
 }
